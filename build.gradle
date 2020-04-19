@@ -1,0 +1,22 @@
+
+allprojects {
+
+    apply plugin: 'java'
+
+    repositories {
+        maven {
+            url "https://clojars.org/repo/"
+        }
+        mavenCentral()
+    }
+
+    group 'lv.greenfrog'
+    version '1.0-SNAPSHOT'
+    sourceCompatibility = 11
+
+    dependencies {
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+        implementation group: 'com.digitalpebble.stormcrawler', name: 'storm-crawler-core', version: '1.16'
+        implementation group: 'org.apache.storm', name: 'storm-core', version: '1.2.3'
+    }
+}
