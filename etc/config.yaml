@@ -34,7 +34,7 @@ config:
     - isSitemap
     - isFeed
 
-  http.agent.name: "Focker"
+  http.agent.name: "Focer"
   http.agent.version: "1.0"
   http.agent.description: "built with StormCrawler Archetype ${version}"
   http.agent.url: "http://someorganization.com/"

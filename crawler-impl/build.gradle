@@ -2,9 +2,17 @@ dependencies {
     implementation project(":page-parser")
 }
 
-task copyToLib(type: Copy){
-    into "$buildDir/output/libs"
-    from configurations.runtime
+jar{
+    manifest{
+        attributes(
+            'Main-Class': 'lv.greenfrog.crawler.FocerCrawlTopology'
+        )
+    }
+    baseName "focer"
+    doLast {
+        project.copy{
+            from jar.archiveFile
+            into "$rootDir/output"
+        }
+    }
 }
-
-jar.dependsOn(copyToLib)

@@ -11,7 +11,7 @@ allprojects {
     }
 
     group 'lv.greenfrog'
-    version '1.0-SNAPSHOT'
+    version '0.1'
     sourceCompatibility = 11
 
     dependencies {
@@ -20,3 +20,31 @@ allprojects {
         implementation group: 'org.apache.storm', name: 'storm-core', version: '1.2.3'
     }
 }
+
+subprojects{
+    if (it.name != 'crawler-impl'){
+        task copyToLib(type: Copy){
+            into "$rootDir/output/libs"
+            from configurations.runtimeClasspath
+        }
+
+        jar{
+            dependsOn(copyToLib)
+            doLast {
+                project.copy{
+                    from jar.archiveFile
+                    into "$rootDir/output/libs"
+                }
+            }
+        }
+    }
+}
+
+task copyEtc(type: Copy){
+    from "$rootDir/etc"
+    into "$rootDir/output"
+}
+
+jar.dependsOn(clean)
+jar.dependsOn(copyEtc)
+jar.dependsOn("crawler-impl:jar")
