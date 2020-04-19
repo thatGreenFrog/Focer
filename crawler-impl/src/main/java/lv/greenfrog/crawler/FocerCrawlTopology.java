@@ -36,8 +36,11 @@ public class FocerCrawlTopology extends ConfigurableTopology {
         builder.setBolt("feeds", new FeedParserBolt())
                 .localOrShuffleGrouping("sitemap");
 
-        builder.setBolt("parse", new PageParserBolt())
+        builder.setBolt("parse", new JSoupParserBolt())
                 .localOrShuffleGrouping("feeds");
+
+        //TODO builder.setBolt("classify", new Classifier())
+        //        .localOrShuffleGrouping("feeds");
 
         builder.setBolt("index", new StdOutIndexer())
                 .localOrShuffleGrouping("parse");
