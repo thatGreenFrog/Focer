@@ -1,0 +1,50 @@
+
+allprojects {
+
+    apply plugin: 'java'
+
+    repositories {
+        maven {
+            url "https://clojars.org/repo/"
+        }
+        mavenCentral()
+    }
+
+    group 'lv.greenfrog'
+    version '0.1'
+    sourceCompatibility = 11
+
+    dependencies {
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+        implementation group: 'com.digitalpebble.stormcrawler', name: 'storm-crawler-core', version: '1.16'
+        implementation group: 'org.apache.storm', name: 'storm-core', version: '1.2.3'
+    }
+}
+
+subprojects{
+    if (it.name != 'crawler-impl'){
+        task copyToLib(type: Copy){
+            into "$rootDir/output/libs"
+            from configurations.runtimeClasspath
+        }
+
+        jar{
+            dependsOn(copyToLib)
+            doLast {
+                project.copy{
+                    from jar.archiveFile
+                    into "$rootDir/output/libs"
+                }
+            }
+        }
+    }
+}
+
+task copyEtc(type: Copy){
+    from "$rootDir/resources"
+    into "$rootDir/output"
+}
+
+jar.dependsOn(clean)
+jar.dependsOn(copyEtc)
+jar.dependsOn("crawler-impl:jar")
