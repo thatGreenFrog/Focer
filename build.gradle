@@ -41,7 +41,7 @@ subprojects{
 }
 
 task copyEtc(type: Copy){
-    from "$rootDir/etc"
+    from "$rootDir/resources"
     into "$rootDir/output"
 }
 
