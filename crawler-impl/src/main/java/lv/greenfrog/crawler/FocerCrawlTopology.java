@@ -6,6 +6,7 @@ import com.digitalpebble.stormcrawler.bolt.*;
 import com.digitalpebble.stormcrawler.indexing.StdOutIndexer;
 import com.digitalpebble.stormcrawler.persistence.StdOutStatusUpdater;
 import com.digitalpebble.stormcrawler.spout.MemorySpout;
+import lv.greenfrog.crawler.queue.DbSpout;
 import lv.greenfrog.page_parser.PageParserBolt;
 import org.apache.storm.topology.TopologyBuilder;
 import org.apache.storm.tuple.Fields;
@@ -22,7 +23,7 @@ public class FocerCrawlTopology extends ConfigurableTopology {
 
         String[] testURLs = new String[] { "https://www.rtu.lv/", "https://www.lu.lv/" };
 
-        builder.setSpout("spout", new MemorySpout(testURLs));
+        builder.setSpout("spout", new DbSpout(true, testURLs));
 
         builder.setBolt("partitioner", new URLPartitionerBolt())
                 .shuffleGrouping("spout");
