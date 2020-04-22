@@ -1,4 +1,4 @@
-package lv.greenfrog.crawler.queue.persistence.entity;
+package lv.greenfrog.crawler.persistence.entity;
 
 public class Domains {
 

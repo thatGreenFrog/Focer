@@ -6,7 +6,7 @@ import com.digitalpebble.stormcrawler.bolt.*;
 import com.digitalpebble.stormcrawler.indexing.StdOutIndexer;
 import com.digitalpebble.stormcrawler.persistence.StdOutStatusUpdater;
 import com.digitalpebble.stormcrawler.spout.MemorySpout;
-import lv.greenfrog.crawler.queue.DbSpout;
+import lv.greenfrog.crawler.sput.DbSpout;
 import lv.greenfrog.page_parser.PageParserBolt;
 import org.apache.storm.topology.TopologyBuilder;
 import org.apache.storm.tuple.Fields;

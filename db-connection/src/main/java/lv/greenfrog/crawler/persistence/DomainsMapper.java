@@ -1,6 +1,6 @@
-package lv.greenfrog.crawler.queue.persistence;
+package lv.greenfrog.crawler.persistence;
 
-import lv.greenfrog.crawler.queue.persistence.entity.Domains;
+import lv.greenfrog.crawler.persistence.entity.Domains;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

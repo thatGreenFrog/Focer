@@ -1,4 +1,5 @@
 rootProject.name = 'focer'
 include 'crawler-impl'
 include 'page-parser'
+include 'db-connection'
 

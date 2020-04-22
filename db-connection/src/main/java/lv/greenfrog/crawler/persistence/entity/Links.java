@@ -1,4 +1,4 @@
-package lv.greenfrog.crawler.queue.persistence.entity;
+package lv.greenfrog.crawler.persistence.entity;
 
 public class Links {
 
@@ -12,18 +12,29 @@ public class Links {
 
     boolean visited;
 
-    int score;
+    Integer score;
 
-    public Links(Integer id, Integer idDomain, String link, byte[] linkHash, boolean visited, int score) {
+    String metadata;
+
+    public Links(Integer id, Integer idDomain, String link, byte[] linkHash, boolean visited, Integer score, String metadata) {
         this.id = id;
         this.idDomain = idDomain;
         this.link = link;
         this.linkHash = linkHash;
         this.visited = visited;
         this.score = score;
+        this.metadata = metadata;
     }
 
-    public int getScore() {
+    public String getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(String metadata) {
+        this.metadata = metadata;
+    }
+
+    public Integer getScore() {
         return score;
     }
 
