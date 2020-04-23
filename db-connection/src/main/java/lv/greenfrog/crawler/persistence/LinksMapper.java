@@ -55,7 +55,7 @@ public interface LinksMapper extends AbstractMapper<Links> {
     })
     Links getByIdAndVisited(Integer id, boolean visited);
 
-    @Select("SELECT * FROM LINKS WHERE LINKHASH = #{hash}")
+    @Select("SELECT * FROM LINKS WHERE LINKHASH = #{array}")
     @Results(value = {
             @Result(property = "id", column = "ID"),
             @Result(property = "idDomain", column = "IDDOMAIN"),

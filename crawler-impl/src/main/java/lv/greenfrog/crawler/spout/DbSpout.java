@@ -1,4 +1,4 @@
-package lv.greenfrog.crawler.sput;
+package lv.greenfrog.crawler.spout;
 
 import com.digitalpebble.stormcrawler.Metadata;
 import com.digitalpebble.stormcrawler.persistence.AbstractQueryingSpout;
@@ -9,7 +9,6 @@ import lv.greenfrog.crawler.persistence.LinksMapper;
 import lv.greenfrog.crawler.persistence.entity.Domains;
 import lv.greenfrog.crawler.persistence.entity.Links;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.storm.spout.Scheme;
 import org.apache.storm.spout.SpoutOutputCollector;
 import org.apache.storm.task.TopologyContext;
