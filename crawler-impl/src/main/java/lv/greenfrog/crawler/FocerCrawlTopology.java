@@ -7,6 +7,7 @@ import com.digitalpebble.stormcrawler.indexing.StdOutIndexer;
 import com.digitalpebble.stormcrawler.persistence.StdOutStatusUpdater;
 import lv.greenfrog.crawler.spout.DbSpout;
 import lv.greenfrog.page_parser.PageParserBolt;
+import net.sf.cglib.core.ClassInfo;
 import org.apache.storm.topology.TopologyBuilder;
 import org.apache.storm.tuple.Fields;
 
@@ -39,10 +40,7 @@ public class FocerCrawlTopology extends ConfigurableTopology {
         builder.setBolt("parse", new PageParserBolt())
                 .localOrShuffleGrouping("feeds");
 
-        //TODO builder.setBolt("classify", new Classifier())
-        //        .localOrShuffleGrouping("feeds");
-
-        builder.setBolt("index", new StdOutIndexer())
+        builder.setBolt("classify", new ClassifierBolt())
                 .localOrShuffleGrouping("parse");
 
         Fields furl = new Fields("url");
@@ -53,7 +51,7 @@ public class FocerCrawlTopology extends ConfigurableTopology {
                 .fieldsGrouping("sitemap", Constants.StatusStreamName, furl)
                 .fieldsGrouping("feeds", Constants.StatusStreamName, furl)
                 .fieldsGrouping("parse", Constants.StatusStreamName, furl)
-                .fieldsGrouping("index", Constants.StatusStreamName, furl);
+                .fieldsGrouping("classify", Constants.StatusStreamName, furl);
 
         return submit("crawl", conf, builder);
     }

@@ -1,6 +1,7 @@
 dependencies {
     implementation project(":page-parser")
     implementation project(":db-connection")
+    implementation project(":classifier-bolt")
 }
 
 jar{
