@@ -21,7 +21,7 @@ public class FocerCrawlTopology extends ConfigurableTopology {
     protected int run(String[] args) {
         TopologyBuilder builder = new TopologyBuilder();
 
-        String[] testURLs = new String[] { "https://www.rtu.lv/", "https://www.lu.lv/" };
+        String[] testURLs = new String[] { "https://www.delfi.lv/auto/zinas/lamborgini-trakojosa-versa-gars-no-traktoru-razosanas-lidz-musdienu-superauto-definicijai.d?id=52106937" };
 
         builder.setSpout("spout", new DbSpout(true, testURLs));
 
