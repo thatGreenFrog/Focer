@@ -38,7 +38,8 @@ public class ClassifierBolt extends StatusEmitterBolt {
         byte[] content = input.getBinaryByField("content");
         Metadata metadata = (Metadata) input.getValueByField("metadata");
         try {
-            String className = classifier.classify(preProcessor.preProcess(text));
+            String txt = preProcessor.preProcess(text);
+            String className = classifier.classify(preProcessor.tokenize(txt));
 
 
             collector.emit(input, new Values(url, content, metadata, text, className));
