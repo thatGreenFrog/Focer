@@ -16,13 +16,17 @@ import de.l3s.boilerpipe.extractors.ArticleExtractor;
 import lv.greenfrog.page_parser.exceptions.LanguageException;
 import lv.greenfrog.page_parser.exceptions.MimeTypeException;
 import lv.greenfrog.page_parser.exceptions.PageParserException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Tuple;
 import org.apache.storm.tuple.Values;
+import org.apache.tika.config.TikaConfig;
+import org.apache.tika.detect.Detector;
 import org.apache.tika.exception.TikaException;
+import org.apache.tika.mime.MediaType;
 import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.html.BoilerpipeContentHandler;
 import org.apache.tika.parser.html.HtmlParser;
@@ -34,6 +38,7 @@ import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -45,10 +50,11 @@ public class PageParserBolt extends StatusEmitterBolt {
 
     private BoilerpipeContentHandler handler;
     private LanguageDetector languageDetector;
+    private Detector detector;
 
     @Override
     public void execute(Tuple input) {
-        if(languageDetector == null) throw new NullPointerException(); //Can't continue if language detector not present.
+        if(languageDetector == null) throw new NullPointerException("PageParserBolt: LanguageDetector not initialized"); //Can't continue if language detector not present.
         log.debug("Starting web page preprocessing");
 
         String text;
@@ -56,13 +62,11 @@ public class PageParserBolt extends StatusEmitterBolt {
         Metadata metadata = (Metadata) input.getValueByField("metadata");
         byte[] content = input.getBinaryByField("content");
 
-        String charset = CharsetIdentification.getCharset(metadata, content, -1);
-
         HtmlParser parser = new HtmlParser();
 
         try {
-            String mimeType = metadata.getFirstValue(HttpHeaders.CONTENT_TYPE);
-            if(mimeType == null || !mimeType.toLowerCase().contains("html")) throw new MimeTypeException(mimeType, url);
+            String mimeType = getMimeType(url, metadata.getFirstValue(HttpHeaders.CONTENT_TYPE), content);
+            if(!mimeType.toLowerCase().contains("html")) throw new MimeTypeException(mimeType, url);
 
             parser.parse(new ByteArrayInputStream(content),
                     new TeeContentHandler(handler),
@@ -98,6 +102,23 @@ public class PageParserBolt extends StatusEmitterBolt {
         handler.recycle();
     }
 
+    public String getMimeType(String URL, String httpCT, byte[] content) {
+
+        org.apache.tika.metadata.Metadata metadata = new org.apache.tika.metadata.Metadata();
+
+        if (StringUtils.isNotBlank(httpCT)) {
+            metadata.set(org.apache.tika.metadata.Metadata.CONTENT_TYPE, httpCT);
+        }
+        metadata.set(org.apache.tika.metadata.Metadata.RESOURCE_NAME_KEY, URL);
+        metadata.set(org.apache.tika.metadata.Metadata.CONTENT_LENGTH, Integer.toString(content.length));
+        try (InputStream stream = new ByteArrayInputStream(content)) {
+            MediaType mt = detector.detect(stream, metadata);
+            return mt.toString();
+        } catch (IOException e) {
+            throw new IllegalStateException("Unexpected IOException", e);
+        }
+    }
+
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
         declarer.declare(new Fields("url", "content", "metadata", "text"));
@@ -108,6 +129,8 @@ public class PageParserBolt extends StatusEmitterBolt {
     public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
         super.prepare(stormConf, context, collector);
         handler = new BoilerpipeContentHandler(new BodyContentHandler(-1), ArticleExtractor.getInstance());
+
+        detector = TikaConfig.getDefaultConfig().getDetector();
 
         try {
             List<LanguageProfile> l = new LanguageProfileReader().readAllBuiltIn();
