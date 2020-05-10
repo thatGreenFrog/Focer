@@ -2,6 +2,7 @@ dependencies {
     implementation project(":page-parser")
     implementation project(":db-connection")
     implementation project(":classifier-bolt")
+    implementation project(":link-parser")
 }
 
 jar{

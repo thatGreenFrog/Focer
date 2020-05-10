@@ -37,21 +37,24 @@ public class FocerCrawlTopology extends ConfigurableTopology {
         builder.setBolt("feeds", new FeedParserBolt())
                 .localOrShuffleGrouping("sitemap");
 
-        builder.setBolt("parse", new PageParserBolt())
+        builder.setBolt("parsePage", new PageParserBolt())
                 .localOrShuffleGrouping("feeds");
 
         builder.setBolt("classify", new ClassifierBolt())
-                .localOrShuffleGrouping("parse");
+                .localOrShuffleGrouping("parsePage");
+
+        builder.setBolt("parseLinks", new LinkParser())
+                .localOrShuffleGrouping("classify");
 
         Fields furl = new Fields("url");
 
-        // can also use MemoryStatusUpdater for simple recursive crawls
         builder.setBolt("status", new StdOutStatusUpdater())
                 .fieldsGrouping("fetch", Constants.StatusStreamName, furl)
                 .fieldsGrouping("sitemap", Constants.StatusStreamName, furl)
                 .fieldsGrouping("feeds", Constants.StatusStreamName, furl)
-                .fieldsGrouping("parse", Constants.StatusStreamName, furl)
-                .fieldsGrouping("classify", Constants.StatusStreamName, furl);
+                .fieldsGrouping("parsePage", Constants.StatusStreamName, furl)
+                .fieldsGrouping("classify", Constants.StatusStreamName, furl)
+                .fieldsGrouping("parseLinks", Constants.StatusStreamName, furl);
 
         return submit("crawl", conf, builder);
     }
