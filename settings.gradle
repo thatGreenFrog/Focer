@@ -3,4 +3,6 @@ include 'crawler-impl'
 include 'page-parser'
 include 'db-connection'
 include 'classifier-bolt'
+include 'prepare-data'
+include 'link-parser'
 

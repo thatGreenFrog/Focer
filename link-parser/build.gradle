@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group 'lv.greenfrog'
+version '0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
+    implementation project(":db-connection")
+}
