@@ -3,11 +3,9 @@ package lv.greenfrog.crawler;
 import com.digitalpebble.stormcrawler.ConfigurableTopology;
 import com.digitalpebble.stormcrawler.Constants;
 import com.digitalpebble.stormcrawler.bolt.*;
-import com.digitalpebble.stormcrawler.indexing.StdOutIndexer;
 import com.digitalpebble.stormcrawler.persistence.StdOutStatusUpdater;
 import lv.greenfrog.crawler.spout.DbSpout;
 import lv.greenfrog.page_parser.PageParserBolt;
-import net.sf.cglib.core.ClassInfo;
 import org.apache.storm.topology.TopologyBuilder;
 import org.apache.storm.tuple.Fields;
 

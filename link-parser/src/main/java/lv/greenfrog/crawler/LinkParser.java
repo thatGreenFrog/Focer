@@ -1,9 +1,7 @@
 package lv.greenfrog.crawler;
 
-import com.digitalpebble.stormcrawler.Constants;
 import com.digitalpebble.stormcrawler.Metadata;
 import com.digitalpebble.stormcrawler.bolt.StatusEmitterBolt;
-import com.digitalpebble.stormcrawler.persistence.Status;
 import com.digitalpebble.stormcrawler.util.CharsetIdentification;
 import lv.greenfrog.crawler.persistence.DomainsMapper;
 import lv.greenfrog.crawler.persistence.LinksMapper;
