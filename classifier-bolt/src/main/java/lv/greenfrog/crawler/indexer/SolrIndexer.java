@@ -15,12 +15,18 @@ public class SolrIndexer{
         this.solrClient = new HttpSolrClient.Builder(solrUrl).build();
     }
 
-    public void save(String title, byte[] content) throws IOException, SolrServerException {
+    public void save(byte[] content, String text, String url, String className) throws IOException, SolrServerException {
         SolrInputDocument doc = new SolrInputDocument();
-        doc.addField("Title", title);
         doc.addField("Content", content);
         doc.addField("id", UUID.randomUUID());
+        doc.addField("url", url);
+        doc.addField("Text", text);
+        doc.addField("Class", className);
         solrClient.add(doc);
         solrClient.commit();
+    }
+
+    public boolean solrIsReachable() throws IOException, SolrServerException {
+        return solrClient.ping().getStatus() == 0;
     }
 }

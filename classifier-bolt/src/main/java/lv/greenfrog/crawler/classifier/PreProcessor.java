@@ -17,7 +17,7 @@ public class PreProcessor {
     private final String stopWords;
     private final NGramTokenizer tokenizer;
 
-    public PreProcessor() throws IOException {
+    public PreProcessor(int maxNgram) throws IOException {
         InputStream stopWordsStream = this.getClass().getClassLoader().getResourceAsStream("stop_words.txt");
         if(stopWordsStream == null) stopWordsStream = this.getClass().getResourceAsStream("stop_words.txt");
         stopWords = Arrays.stream(new String(stopWordsStream.readAllBytes(), StandardCharsets.UTF_8).split("\\s+"))
@@ -27,6 +27,7 @@ public class PreProcessor {
         this.stemmer = new LatvianStemmer();
 
         tokenizer = new NGramTokenizer();
+        tokenizer.setNGramMaxSize(maxNgram);
     }
 
     public String preProcess(String text) {
