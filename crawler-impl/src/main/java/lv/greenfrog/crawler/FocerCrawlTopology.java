@@ -19,13 +19,7 @@ public class FocerCrawlTopology extends ConfigurableTopology {
     protected int run(String[] args) {
         TopologyBuilder builder = new TopologyBuilder();
 
-        String[] testURLs = new String[] { "http://www.baltaisruncis.lv/blogs/latvijas-labakie-blogi/",
-                                            "https://www.delfi.lv/",
-                                            "https://www.tvnet.lv/",
-                                            "https://www.apollo.lv/"
-        };
-
-        builder.setSpout("spout", new DbSpout(true, testURLs));
+        builder.setSpout("spout", new DbSpout());
 
         builder.setBolt("partitioner", new URLPartitionerBolt())
                 .shuffleGrouping("spout");

@@ -3,6 +3,7 @@ package lv.greenfrog.crawler;
 import com.digitalpebble.stormcrawler.Metadata;
 import com.digitalpebble.stormcrawler.bolt.StatusEmitterBolt;
 import com.digitalpebble.stormcrawler.util.CharsetIdentification;
+import com.digitalpebble.stormcrawler.util.ConfUtils;
 import lv.greenfrog.crawler.persistence.DomainsMapper;
 import lv.greenfrog.crawler.persistence.LinksMapper;
 import lv.greenfrog.crawler.persistence.entity.Domains;
@@ -27,6 +28,7 @@ import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.digitalpebble.stormcrawler.Constants.StatusStreamName;
 
@@ -35,6 +37,7 @@ public class LinkParser extends StatusEmitterBolt {
     private static final Logger log = LoggerFactory.getLogger(LinkParser.class);
     private MessageDigest md;
     private String resourceFolder;
+    private String blacklist;
 
     @Override
     public void execute(Tuple input) {
@@ -66,7 +69,7 @@ public class LinkParser extends StatusEmitterBolt {
                     try {
                         URI uri = new URI(url);
 
-                        if(uri.getHost() == null) throw new URISyntaxException("", ""); //e-mail and other crap
+                        if(uri.getHost() == null || uri.getHost().matches(blacklist)) throw new URISyntaxException("", ""); //e-mail and other crap
                         String domain = uri.getHost().startsWith("www.") ? uri.getHost().substring(4) : uri.getHost();
 
                         Domains newDomain = session.getMapper(DomainsMapper.class).getByLinkDomain(domain);
@@ -96,10 +99,15 @@ public class LinkParser extends StatusEmitterBolt {
         session.close();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
         super.prepare(stormConf, context, collector);
-        resourceFolder = (String) stormConf.get("focer.resourceFolder");
+        blacklist = ConfUtils.loadListFromConf("focer.blacklist", stormConf)
+                .stream()
+                .map(s -> String.format((".*%s.*"), s))
+                .collect(Collectors.joining("|"));
+        resourceFolder = ConfUtils.getString(stormConf, "focer.resourceFolder");
         try {
             md = MessageDigest.getInstance("SHA-1");
         } catch (NoSuchAlgorithmException e) {

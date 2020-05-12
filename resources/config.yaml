@@ -100,3 +100,13 @@ config:
   focer.maxNgramBinary: 3
   focer.maxNgramMulti: 1
   focer.clearQueue: 1
+  focer.seeds:
+    -"http://www.baltaisruncis.lv/blogs/latvijas-labakie-blogi/"
+    -"https://www.delfi.lv/"
+    -"https://www.tvnet.lv/"
+    -"https://www.apollo.lv/
+  focer.blacklist:
+    -"draugiem.lv"
+    -"facebook.com"
+    -"twitter.com"
+    -"vkontakte.ru"

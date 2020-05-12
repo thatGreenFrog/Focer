@@ -4,6 +4,7 @@ import com.digitalpebble.stormcrawler.Constants;
 import com.digitalpebble.stormcrawler.Metadata;
 import com.digitalpebble.stormcrawler.bolt.StatusEmitterBolt;
 import com.digitalpebble.stormcrawler.persistence.Status;
+import com.digitalpebble.stormcrawler.util.ConfUtils;
 import lv.greenfrog.crawler.classifier.AbstractFocerClassifier;
 import lv.greenfrog.crawler.indexer.SolrIndexer;
 import org.apache.storm.task.OutputCollector;
@@ -65,12 +66,13 @@ public class ClassifierBolt extends StatusEmitterBolt {
     @Override
     public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
         super.prepare(stormConf, context, collector);
-        solrIndexer = new SolrIndexer((String) stormConf.get("focer.solr"));
+        solrIndexer = new SolrIndexer(ConfUtils.getString(stormConf, "focer.solr"));
         try {
             solrIsReachable = solrIndexer.solrIsReachable();
+            String resourceFolder = ConfUtils.getString(stormConf, "focer.resourceFolder");
             classifiers = new HashMap<>();
-            classifiers.put("b", new AbstractFocerClassifier((String) stormConf.get("focer.resourceFolder"), (Integer) stormConf.get("focer.maxNgramBinary")));
-            classifiers.put("m", new AbstractFocerClassifier((String) stormConf.get("focer.resourceFolder"), (Integer) stormConf.get("focer.maxNgramMulti")));
+            classifiers.put("b", new AbstractFocerClassifier(resourceFolder, "binary", ConfUtils.getInt(stormConf, "focer.maxNgramBinary", 3)));
+            classifiers.put("m", new AbstractFocerClassifier(resourceFolder, "multi", ConfUtils.getInt(stormConf, "focer.maxNgramMulti", 3)));
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new RuntimeException(e);

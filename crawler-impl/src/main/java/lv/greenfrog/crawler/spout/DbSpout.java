@@ -2,6 +2,7 @@ package lv.greenfrog.crawler.spout;
 
 import com.digitalpebble.stormcrawler.Metadata;
 import com.digitalpebble.stormcrawler.persistence.AbstractQueryingSpout;
+import com.digitalpebble.stormcrawler.util.ConfUtils;
 import com.digitalpebble.stormcrawler.util.StringTabScheme;
 import lv.greenfrog.crawler.SessionManager;
 import lv.greenfrog.crawler.persistence.DomainsMapper;
@@ -9,6 +10,7 @@ import lv.greenfrog.crawler.persistence.LinksMapper;
 import lv.greenfrog.crawler.persistence.entity.Domains;
 import lv.greenfrog.crawler.persistence.entity.Links;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.storm.shade.org.apache.jute.Utils;
 import org.apache.storm.spout.Scheme;
 import org.apache.storm.spout.SpoutOutputCollector;
 import org.apache.storm.task.TopologyContext;
@@ -29,19 +31,16 @@ public class DbSpout extends AbstractQueryingSpout {
 
     private static final Scheme SCHEME = new StringTabScheme();
 
-    private boolean cleanDb;
-    private final String[] seeds;
     private String resourceFolder;
 
-    public DbSpout(boolean cleanDb, String[] seeds) {
-        this.cleanDb = cleanDb;
-        this.seeds = seeds;
-    }
-
+    @SuppressWarnings("unchecked")
     @Override
     public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
         super.open(conf, context, collector);
-        resourceFolder = (String) conf.get("focer.resourceFolder");
+        resourceFolder = ConfUtils.getString(conf, "focer.resourceFolder");
+        boolean cleanDb = ConfUtils.getBoolean(conf, "focer.cleanDb", false);
+        List<String> seeds = ConfUtils.loadListFromConf("focer.seeds", conf);
+
         if(cleanDb){
            SqlSession session = SessionManager.getSession(resourceFolder);
            LinksMapper lm = session.getMapper(LinksMapper.class);
@@ -49,7 +48,7 @@ public class DbSpout extends AbstractQueryingSpout {
 
            lm.cleanTable();
            dm.cleanTable();
-           Arrays.stream(seeds)
+           Arrays.stream((String[]) seeds.toArray())
                    .forEach(s -> {
                        dm.insert(new Domains(null, s));
                        try {

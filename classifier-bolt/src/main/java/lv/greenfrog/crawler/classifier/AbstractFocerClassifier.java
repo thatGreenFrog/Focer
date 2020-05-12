@@ -20,8 +20,8 @@ public class AbstractFocerClassifier {
     private ArrayList<Attribute> attributes;
     private Attribute classes;
 
-    public AbstractFocerClassifier(String resourceFolder, Integer maxNgram) throws Exception {
-        buildClassifier(resourceFolder, maxNgram);
+    public AbstractFocerClassifier(String resourceFolder, String subfolder, Integer maxNgram) throws Exception {
+        buildClassifier(resourceFolder, subfolder, maxNgram);
     }
 
     public String classify(String text) throws Exception {
@@ -40,13 +40,14 @@ public class AbstractFocerClassifier {
         return classes.value((int) c);
     }
 
-    public void buildClassifier(String resourceFolder, Integer maxNgram) throws Exception {
-        classifier = (AbstractClassifier) SerializationHelper.read(String.format("%s%sclassifier.model", resourceFolder, File.separator));
+    public void buildClassifier(String resourceFolder, String subfolder, Integer maxNgram) throws Exception {
+        String fullFolder = String.format("%s%s%s%s", resourceFolder, File.separator, subfolder, File.separator);
+        classifier = (AbstractClassifier) SerializationHelper.read(String.format("%sclassifier.model", fullFolder));
 
         preProcessor = new PreProcessor(maxNgram);
 
         ArffLoader loader = new ArffLoader();
-        loader.setFile(new File(String.format("%s%sclassifier.arff", resourceFolder, File.separator)));
+        loader.setFile(new File(String.format("%sclassifier.arff", fullFolder)));
         structure = loader.getStructure();
         structure.setClassIndex(0);
 
