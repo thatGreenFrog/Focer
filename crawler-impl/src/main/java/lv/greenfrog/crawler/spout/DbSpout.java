@@ -31,6 +31,7 @@ public class DbSpout extends AbstractQueryingSpout {
 
     private boolean cleanDb;
     private final String[] seeds;
+    private String resourceFolder;
 
     public DbSpout(boolean cleanDb, String[] seeds) {
         this.cleanDb = cleanDb;
@@ -40,9 +41,9 @@ public class DbSpout extends AbstractQueryingSpout {
     @Override
     public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
         super.open(conf, context, collector);
-
+        resourceFolder = (String) conf.get("focer.resourceFolder");
         if(cleanDb){
-           SqlSession session = SessionManager.getSession();
+           SqlSession session = SessionManager.getSession(resourceFolder);
            LinksMapper lm = session.getMapper(LinksMapper.class);
            DomainsMapper dm = session.getMapper(DomainsMapper.class);
 
@@ -66,7 +67,7 @@ public class DbSpout extends AbstractQueryingSpout {
 
     @Override
     protected void populateBuffer() {
-        SqlSession session = SessionManager.getSession();
+        SqlSession session = SessionManager.getSession(resourceFolder);
         Links link = session.getMapper(LinksMapper.class).getByScore();
         if(link != null) {
             List linkData = SCHEME.deserialize(ByteBuffer.wrap((link.getLink() + "\t" + link.getMetadata()).getBytes()));

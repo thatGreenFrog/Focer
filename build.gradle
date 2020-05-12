@@ -17,7 +17,7 @@ allprojects {
     dependencies {
         testCompile group: 'junit', name: 'junit', version: '4.12'
         implementation group: 'com.digitalpebble.stormcrawler', name: 'storm-crawler-core', version: '1.16'
-        implementation group: 'org.apache.storm', name: 'storm-core', version: '1.2.3'
+        compileOnly group: 'org.apache.storm', name: 'storm-core', version: '1.2.3'
         implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.4'
         implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
     }

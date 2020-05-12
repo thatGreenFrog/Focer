@@ -94,3 +94,9 @@ config:
   topology.metrics.consumer.register:
     - class: "org.apache.storm.metric.LoggingMetricsConsumer"
       parallelism.hint: 1
+
+  focer.resourceFolder: "C:\\crawler\\resources"
+  focer.solr: "http://192.168.0.128:8983/solr/crawl"
+  focer.maxNgramBinary: 3
+  focer.maxNgramMulti: 1
+  focer.clearQueue: 1

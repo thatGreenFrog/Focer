@@ -5,8 +5,6 @@ import com.digitalpebble.stormcrawler.Metadata;
 import com.digitalpebble.stormcrawler.bolt.StatusEmitterBolt;
 import com.digitalpebble.stormcrawler.persistence.Status;
 import lv.greenfrog.crawler.classifier.AbstractFocerClassifier;
-import lv.greenfrog.crawler.classifier.BinaryFocerClassifier;
-import lv.greenfrog.crawler.classifier.MultiClassFocerClassifier;
 import lv.greenfrog.crawler.indexer.SolrIndexer;
 import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
@@ -47,6 +45,7 @@ public class ClassifierBolt extends StatusEmitterBolt {
                 if(solrIsReachable) solrIndexer.save(content, text, url, className);
 
             }
+            log.info("URL {} classified as {}", url, className);
 
             collector.emit(input, new Values(url, content, metadata, text, className));
             collector.ack(input);
@@ -66,12 +65,12 @@ public class ClassifierBolt extends StatusEmitterBolt {
     @Override
     public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
         super.prepare(stormConf, context, collector);
-        solrIndexer = new SolrIndexer((String) stormConf.getOrDefault("focer.solr", "http://192.168.0.125:8983/solr/crawl"));
+        solrIndexer = new SolrIndexer((String) stormConf.get("focer.solr"));
         try {
             solrIsReachable = solrIndexer.solrIsReachable();
             classifiers = new HashMap<>();
-            classifiers.put("b", new BinaryFocerClassifier((String) stormConf.getOrDefault("focer.resourceFolder", "C:\\crawler\\resources")));
-            classifiers.put("m", new MultiClassFocerClassifier((String) stormConf.getOrDefault("focer.resourceFolder", "C:\\crawler\\resources")));
+            classifiers.put("b", new AbstractFocerClassifier((String) stormConf.get("focer.resourceFolder"), (Integer) stormConf.get("focer.maxNgramBinary")));
+            classifiers.put("m", new AbstractFocerClassifier((String) stormConf.get("focer.resourceFolder"), (Integer) stormConf.get("focer.maxNgramMulti")));
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new RuntimeException(e);

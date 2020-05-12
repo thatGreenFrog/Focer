@@ -9,11 +9,13 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
+import java.io.File;
+
 public class SessionManager {
 
     private static SqlSessionFactory factory;
 
-    public static SqlSession getSession(){
+    public static SqlSession getSession(String resourceFolder){
         if(factory == null){
             Configuration cnf = new Configuration();
             cnf.addMappers("lv.greenfrog.crawler.persistence", AbstractMapper.class);
@@ -22,7 +24,7 @@ public class SessionManager {
                     new JdbcTransactionFactory(),
                     new PooledDataSource(
                             "org.h2.Driver",
-                            "jdbc:h2:C:\\crawler\\QUEUE",
+                            String.format("jdbc:h2:%s%s%s%s%s", resourceFolder, File.separator, "db", File.separator, "QUEUE"),
                             null,
                             null
                     )

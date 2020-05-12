@@ -12,16 +12,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class AbstractFocerClassifier {
+public class AbstractFocerClassifier {
 
-    protected PreProcessor preProcessor;
-    protected AbstractClassifier classifier;
-    protected Instances structure;
-    protected ArrayList<Attribute> attributes;
-    protected Attribute classes;
+    private PreProcessor preProcessor;
+    private AbstractClassifier classifier;
+    private Instances structure;
+    private ArrayList<Attribute> attributes;
+    private Attribute classes;
 
-    public AbstractFocerClassifier(String resourceFolder) throws Exception {
-        buildClassifier(resourceFolder);
+    public AbstractFocerClassifier(String resourceFolder, Integer maxNgram) throws Exception {
+        buildClassifier(resourceFolder, maxNgram);
     }
 
     public String classify(String text) throws Exception {
@@ -40,12 +40,10 @@ public abstract class AbstractFocerClassifier {
         return classes.value((int) c);
     }
 
-    protected abstract int getMaxNgram();
-
-    public void buildClassifier(String resourceFolder) throws Exception {
+    public void buildClassifier(String resourceFolder, Integer maxNgram) throws Exception {
         classifier = (AbstractClassifier) SerializationHelper.read(String.format("%s%sclassifier.model", resourceFolder, File.separator));
 
-        preProcessor = new PreProcessor(getMaxNgram());
+        preProcessor = new PreProcessor(maxNgram);
 
         ArffLoader loader = new ArffLoader();
         loader.setFile(new File(String.format("%s%sclassifier.arff", resourceFolder, File.separator)));

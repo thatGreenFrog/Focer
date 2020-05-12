@@ -34,6 +34,7 @@ public class LinkParser extends StatusEmitterBolt {
 
     private static final Logger log = LoggerFactory.getLogger(LinkParser.class);
     private MessageDigest md;
+    private String resourceFolder;
 
     @Override
     public void execute(Tuple input) {
@@ -56,7 +57,7 @@ public class LinkParser extends StatusEmitterBolt {
 
 
     private void saveLinks(Elements anchor, String pageClass) {
-        SqlSession session = SessionManager.getSession();
+        SqlSession session = SessionManager.getSession(resourceFolder);
         final int score = pageClass.equals("Negative") ? -1 : 1;
         anchor.stream()
                 .filter(a -> !"nofollow".equalsIgnoreCase(a.attr("rel")) && a.attr("abs:href") != null && !a.attr("abs:href").isEmpty())
@@ -98,6 +99,7 @@ public class LinkParser extends StatusEmitterBolt {
     @Override
     public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
         super.prepare(stormConf, context, collector);
+        resourceFolder = (String) stormConf.get("focer.resourceFolder");
         try {
             md = MessageDigest.getInstance("SHA-1");
         } catch (NoSuchAlgorithmException e) {
