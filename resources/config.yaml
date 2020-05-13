@@ -99,7 +99,7 @@ config:
   focer.solr: "http://192.168.0.128:8983/solr/crawl"
   focer.maxNgramBinary: 3
   focer.maxNgramMulti: 1
-  focer.clearQueue: 1
+  focer.cleanDb: true
   focer.seeds:
     -"http://www.baltaisruncis.lv/blogs/latvijas-labakie-blogi/"
     -"https://www.delfi.lv/"
