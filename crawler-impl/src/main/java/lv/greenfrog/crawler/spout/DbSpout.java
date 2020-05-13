@@ -48,11 +48,10 @@ public class DbSpout extends AbstractQueryingSpout {
 
            lm.cleanTable();
            dm.cleanTable();
-           Arrays.stream((String[]) seeds.toArray())
-                   .forEach(s -> {
+           seeds.forEach(s -> {
                        dm.insert(new Domains(null, s));
                        try {
-                           lm.insert(new Links(null, dm.getByLinkDomain(s).getId(), s, MessageDigest.getInstance("SHA-1").digest(s.getBytes()), false, 1, null));
+                           lm.insert(new Links(null, dm.getByLinkDomain(s).getId(), s, MessageDigest.getInstance("SHA-1").digest(s.getBytes()), false, 0, null));
                        } catch (NoSuchAlgorithmException e) {
                            log.error("Error hashing link: {}", s, e);
                        }
