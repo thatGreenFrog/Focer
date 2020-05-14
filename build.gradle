@@ -27,6 +27,11 @@ allprojects {
     }
 }
 
+def mainProjects = [':crawler-impl', ':page-parser', ':db-connection', ':classifier-bolt', ':link-parser']
+task oneJar( type: Jar , dependsOn: mainProjects.collect{ it+":compileJava"}) {
+    from files(mainProjects.collect{ project(it).sourceSets.main.output })
+}
+
 subprojects{
     if (it.name != 'crawler-impl'){
         task copyToLib(type: Copy){
