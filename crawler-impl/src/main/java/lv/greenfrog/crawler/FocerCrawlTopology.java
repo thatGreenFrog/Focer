@@ -52,7 +52,7 @@ public class FocerCrawlTopology extends ConfigurableTopology {
                 .fieldsGrouping("classify", Constants.StatusStreamName, furl)
                 .fieldsGrouping("parseLinks", Constants.StatusStreamName, furl);
 
-        return submit("crawl", conf, builder);
+        return submit("crawl_tf_idf", conf, builder);
     }
 
 }

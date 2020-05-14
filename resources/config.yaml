@@ -99,14 +99,16 @@ config:
   focer.solr: "http://192.168.0.128:8983/solr/crawl"
   focer.maxNgramBinary: 3
   focer.maxNgramMulti: 1
+  focer.binaryDocCount: 4649
+  focer.multiDocCount: 2349
   focer.cleanDb: true
   focer.seeds:
-    -"http://www.baltaisruncis.lv/blogs/latvijas-labakie-blogi/"
-    -"https://www.delfi.lv/"
-    -"https://www.tvnet.lv/"
-    -"https://www.apollo.lv/
+    - "http://www.baltaisruncis.lv/blogs/latvijas-labakie-blogi/"
+    - "https://www.delfi.lv/"
+    - "https://www.tvnet.lv/"
+    - "https://www.apollo.lv/"
   focer.blacklist:
-    -"draugiem.lv"
-    -"facebook.com"
-    -"twitter.com"
-    -"vkontakte.ru"
+    - "draugiem.lv"
+    - "facebook.com"
+    - "twitter.com"
+    - "vkontakte.ru"
