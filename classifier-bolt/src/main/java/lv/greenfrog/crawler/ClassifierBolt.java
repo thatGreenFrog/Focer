@@ -46,7 +46,6 @@ public class ClassifierBolt extends StatusEmitterBolt {
                 if(solrIsReachable) solrIndexer.save(content, text, url, className);
 
             }
-            log.info("URL {} classified as {}", url, className);
 
             collector.emit(input, new Values(url, content, metadata, text, className));
             collector.ack(input);
@@ -100,4 +99,5 @@ public class ClassifierBolt extends StatusEmitterBolt {
         declarer.declare(new Fields("url", "content", "metadata", "text", "class"));
         declarer.declareStream(StatusStreamName, new Fields("url", "metadata", "status"));
     }
+
 }

@@ -15,9 +15,8 @@ public class PreProcessor {
 
     private final LatvianStemmer stemmer;
     private final String stopWords;
-    private final NGramTokenizer tokenizer;
 
-    public PreProcessor(int maxNgram) throws IOException {
+    public PreProcessor() throws IOException {
         InputStream stopWordsStream = this.getClass().getClassLoader().getResourceAsStream("stop_words.txt");
         if(stopWordsStream == null) stopWordsStream = this.getClass().getResourceAsStream("stop_words.txt");
         stopWords = Arrays.stream(new String(stopWordsStream.readAllBytes(), StandardCharsets.UTF_8).split("\\s+"))
@@ -26,26 +25,25 @@ public class PreProcessor {
 
         this.stemmer = new LatvianStemmer();
 
-        tokenizer = new NGramTokenizer();
-        tokenizer.setNGramMaxSize(maxNgram);
     }
 
     public String preProcess(String text) {
+        //Create array of words
         return Arrays.stream(text.split("\\s"))
+                //Case folding
                 .map(String::toLowerCase)
+                //Remove non words
                 .map(s -> s.replaceAll("[^A-Za-zāčēģīķļņšūž ]", ""))
+                //Filter out stop words
                 .filter(s -> !s.matches(stopWords) && !s.isEmpty())
-                .map(s -> s.substring(0, stemmer.stem(s.toCharArray(), s.length())))
+                //Stem words
+                .map(s -> {
+                    char[] sArr = s.toCharArray();
+                    int l = stemmer.stem(sArr, s.length());
+                    return String.valueOf(sArr, 0, l);
+                })
+                //Collect to String
                 .collect(Collectors.joining(" "));
-    }
-
-    public List<String> tokenize(String text) {
-        tokenizer.tokenize(text);
-        List<String> tokens = new ArrayList<>();
-        while(tokenizer.hasMoreElements()){
-            tokens.add(tokenizer.nextElement());
-        }
-        return tokens;
     }
 
     public LatvianStemmer getStemmer() {
@@ -54,9 +52,5 @@ public class PreProcessor {
 
     public String getStopWords() {
         return stopWords;
-    }
-
-    public NGramTokenizer getTokenizer() {
-        return tokenizer;
     }
 }
