@@ -1,7 +1,13 @@
 /.idea/
 /.gradle/
-/build/
-/crawler-impl/build/
+/build/*
+/crawler-impl/build/*
+/output/*
+/classifier-bolt/build/
+crawler-impl/build/*
+db-connection/build/*
+link-parser/build/*
+page-parser/build/*
 
 # Compiled class file
 *.class
@@ -26,4 +32,3 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-/output/
