@@ -38,6 +38,7 @@ public class AbstractFocerClassifier {
         Instance instanceToClassify = new DenseInstance(1, vals);
         //Add to dataset
         classifyInstances.add(instanceToClassify);
+        instanceToClassify.setDataset(classifyInstances);
         //Class is unknown
         instanceToClassify.setClassMissing();
 
