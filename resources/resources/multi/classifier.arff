@@ -1,32 +1,45 @@
-@relation 'multi-weka.filters.unsupervised.attribute.StringToWordVector-R1-W1000-prune-rate-1.0-C-T-N0-L-stemmerweka.core.stemmers.NullStemmer-stopwords-handlerweka.core.stopwords.Null-M1-tokenizerweka.core.tokenizers.WordTokenizer -delimiters \" \\r\\n\\t.,;:\\\'\\\"()?!\"-dictionaryD:\\GitHub\\Focer\\resources\\multi_1_gram.dictionary-weka.filters.unsupervised.attribute.Remove-R2,5-6,13-14,16,19,25,28,31-32,37-39,41-43,46,53,56,58,60,62-63,71,73,77,80-81,84-86,94,98,102,104-105,113,118,120-121,123,134,136,140-141,147,149,155,158,160,175,178,183-184,196-197,203,206,208,212,214-215,220-221,226,230,235,239,245,249-251,254-255,267,281,288,291,294,298,300,303-305,312-313,316,335,339-340,342,344,350,353,360-361,363,384-385,389,396,412-413,416,421,423,427,435,440,456,464,475,477-478,485-486,491-497,503,507,510-513,515,519,525,533-534,537,541-542,545-547,555,557,568,570-575,578-579,581-582,584,586-588,590,600,609-610,614-615,621,626,638,641,644,647-648,653,660,662-663,669,671,674,676,679,681-684,686,688,695,697,704,708,717-718,720-722,728,732,740,745-746,748-751,753,766,768-770,775,783-785,789,802,806,808,826-827,831-832,836,839,843-847,851,853,858-860,871,873-876,886,888,890,893,900,908,910,914,918,921-923,931-932,935,950-952,969,972,974,979,983,987,990-991,995-996,998,1000-1001'
+@relation 'multi-weka.filters.unsupervised.attribute.StringToWordVector-R1-W1000-prune-rate-1.0-C-T-I-N0-L-stemmerweka.core.stemmers.NullStemmer-stopwords-handlerweka.core.stopwords.Null-M1-tokenizerweka.core.tokenizers.NGramTokenizer -max 3 -min 1 -delimiters \" \\r\\n\\t.,;:\\\'\\\"()?!\"-dictionaryD:\\WebPages\\Multi-class\\multi_3_gram.dictionary'
 
 @attribute class {Auto,Culture,Finance,Lifestyle,Politics,Sports,Tech}
+@attribute a numeric
 @attribute abonement numeric
-@attribute administrācij numeric
+@attribute abonent numeric
+@attribute aicin numeric
 @attribute aizliegt numeric
 @attribute aizraujoš numeric
+@attribute 'aizraujoš seriāl' numeric
+@attribute 'aizraujoš seriāl nedēļ' numeric
 @attribute aizsardzīb numeric
 @attribute aizvadīt numeric
-@attribute aizvien numeric
 @attribute aktier numeric
+@attribute aktivitāt numeric
+@attribute aktīv numeric
 @attribute alg numeric
+@attribute alkohol numeric
 @attribute amat numeric
 @attribute analīz numeric
+@attribute and numeric
 @attribute andr numeric
 @attribute apgr numeric
+@attribute 'apgr svar' numeric
+@attribute 'apgr svar kg' numeric
 @attribute apjom numeric
 @attribute apmēr numeric
 @attribute aprīl numeric
+@attribute apstākl numeric
 @attribute aptuven numeric
-@attribute apvienīb numeric
+@attribute arvien numeric
 @attribute as numeric
-@attribute asociācij numeric
+@attribute asv numeric
 @attribute atbalst numeric
 @attribute atbild numeric
 @attribute atbildēt numeric
 @attribute atbildīg numeric
+@attribute atbilstoš numeric
+@attribute atcelt numeric
 @attribute atkal numeric
-@attribute atlēt numeric
+@attribute atklāj numeric
+@attribute atklāt numeric
 @attribute atpakaļ numeric
 @attribute atrast numeric
 @attribute atrod numeric
@@ -34,53 +47,80 @@
 @attribute atsevišķ numeric
 @attribute attiecīb numeric
 @attribute attiecīg numeric
+@attribute attālināt numeric
 @attribute attēl numeric
 @attribute attīstīb numeric
+@attribute atvērt numeric
 @attribute atļauj numeric
+@attribute atšķirīb numeric
 @attribute aug numeric
+@attribute augst numeric
 @attribute augstum numeric
+@attribute 'augstum mm' numeric
+@attribute 'augstum mm garantij' numeric
+@attribute augstāk numeric
+@attribute august numeric
 @attribute augš numeric
 @attribute aut numeric
 @attribute autobus numeric
 @attribute automašīn numeric
-@attribute automobiļ numeric
+@attribute automobil numeric
 @attribute automātisk numeric
 @attribute autor numeric
+@attribute avot numeric
 @attribute aģentūr numeric
 @attribute bail numeric
-@attribute bals numeric
 @attribute balt numeric
+@attribute baltij numeric
 @attribute balv numeric
 @attribute bank numeric
+@attribute beig numeric
 @attribute biedr numeric
 @attribute biež numeric
+@attribute bij numeric
+@attribute bijus numeric
+@attribute bijuš numeric
 @attribute bild numeric
 @attribute biroj numeric
 @attribute biznes numeric
-@attribute brauc numeric
 @attribute braucien numeric
-@attribute braukšan numeric
 @attribute brīd numeric
+@attribute 'brīd kad' numeric
+@attribute brīv numeric
 @attribute brīž numeric
 @attribute budžet numeric
 @attribute bāk numeric
+@attribute 'bāk tilpum' numeric
+@attribute 'bāk tilpum litr' numeric
 @attribute bērn numeric
 @attribute būt numeric
 @attribute būtisk numeric
+@attribute cel numeric
 @attribute cen numeric
+@attribute centr numeric
+@attribute centrāl numeric
 @attribute ceļ numeric
 @attribute ceļojum numeric
 @attribute cik numeric
 @attribute cilindr numeric
+@attribute 'cilindr takt' numeric
 @attribute cilvēk numeric
+@attribute 'cilvēk kur' numeric
 @attribute cit numeric
 @attribute citād numeric
+@attribute cm numeric
+@attribute 'cm jaud' numeric
+@attribute 'cm jaud kw' numeric
 @attribute cod numeric
+@attribute 'cod for' numeric
+@attribute 'cod for key' numeric
 @attribute covid numeric
 @attribute crossfit numeric
-@attribute cīņ numeric
+@attribute d numeric
 @attribute dab numeric
-@attribute dalībvalst numeric
+@attribute dal numeric
+@attribute dalībniek numeric
+@attribute dar numeric
 @attribute darb numeric
 @attribute darbiniek numeric
 @attribute darboj numeric
@@ -90,45 +130,72 @@
 @attribute dator numeric
 @attribute daudz numeric
 @attribute daudzum numeric
+@attribute 'daudzum karter' numeric
+@attribute 'daudzum karter litr' numeric
 @attribute daļ numeric
+@attribute daž numeric
 @attribute dažād numeric
 @attribute degviel numeric
 @attribute delf numeric
+@attribute 'delf plu' numeric
 @attribute deputāt numeric
+@attribute desmit numeric
+@attribute dev numeric
 @attribute dien numeric
 @attribute dienest numeric
 @attribute diezgan numeric
 @attribute digitāl numeric
-@attribute diskusij numeric
+@attribute div numeric
 @attribute dizain numeric
+@attribute dod numeric
 @attribute dohc numeric
+@attribute 'dohc kubatūr' numeric
+@attribute 'dohc kubatūr cm' numeric
 @attribute dokument numeric
 @attribute dom numeric
 @attribute domāj numeric
 @attribute domāt numeric
+@attribute dot numeric
 @attribute doti numeric
 @attribute draug numeric
+@attribute 'draug whatsapp' numeric
+@attribute 'draug whatsapp epast' numeric
 @attribute drošīb numeric
+@attribute dzelzcel numeric
 @attribute dzesēšan numeric
 @attribute dziesm numeric
-@attribute dzinēj numeric
 @attribute dzīv numeric
-@attribute dzīvot numeric
+@attribute 'dzīv princip' numeric
+@attribute 'dzīv princip aizraujoš' numeric
+@attribute dzīvokl numeric
 @attribute dīkstāv numeric
 @attribute džek numeric
+@attribute 'džek nikolson' numeric
+@attribute 'džek nikolson dzīv' numeric
 @attribute eir numeric
 @attribute eirop numeric
 @attribute ekonomik numeric
 @attribute ekonomisk numeric
+@attribute ekrān numeric
 @attribute ekspert numeric
 @attribute elektrisk numeric
 @attribute element numeric
+@attribute enerģij numeric
 @attribute epast numeric
+@attribute 'epast pinterest' numeric
+@attribute 'epast pinterest linkedin' numeric
 @attribute es numeric
+@attribute esot numeric
 @attribute esoš numeric
 @attribute eur numeric
 @attribute eļļ numeric
+@attribute 'eļļ daudzum' numeric
+@attribute 'eļļ daudzum karter' numeric
 @attribute facebook numeric
+@attribute 'facebook twitter' numeric
+@attribute 'facebook twitter draug' numeric
+@attribute fakt numeric
+@attribute faktor numeric
 @attribute februār numeric
 @attribute festivāl numeric
 @attribute film numeric
@@ -137,65 +204,85 @@
 @attribute fizisk numeric
 @attribute fond numeric
 @attribute for numeric
+@attribute 'for key' numeric
 @attribute form numeric
 @attribute fot numeric
 @attribute found numeric
+@attribute francij numeric
+@attribute g numeric
 @attribute gad numeric
+@attribute 'gad aprīl' numeric
+@attribute 'gad laik' numeric
+@attribute 'gad motor' numeric
+@attribute 'gad motor cilindr' numeric
 @attribute gadsimt numeric
 @attribute gadījum numeric
 @attribute gais numeric
 @attribute gaism numeric
+@attribute gait numeric
 @attribute gal numeric
 @attribute galv numeric
+@attribute galven numeric
 @attribute gandrīz numeric
+@attribute gar numeric
 @attribute garantij numeric
+@attribute 'garantij gad' numeric
+@attribute 'garantij gad motor' numeric
 @attribute garum numeric
-@attribute garš numeric
+@attribute 'garum mm' numeric
+@attribute 'garum mm platum' numeric
+@attribute gatav numeric
 @attribute gluž numeric
+@attribute grib numeric
 @attribute grup numeric
-@attribute grād numeric
 @attribute grāmat numeric
 @attribute grūt numeric
+@attribute gāz numeric
+@attribute i numeric
 @attribute iautolv numeric
 @attribute idej numeric
 @attribute iedzīvotāj numeric
 @attribute ieguldījum numeric
+@attribute ieguv numeric
 @attribute iegādāti numeric
 @attribute iegūt numeric
-@attribute iekārt numeric
-@attribute iekšēj numeric
+@attribute iekļaut numeric
 @attribute iel numeric
 @attribute iemesl numeric
 @attribute ienākum numeric
+@attribute iepriek numeric
 @attribute iepriekšēj numeric
 @attribute ierakst numeric
 @attribute ierobežojum numeric
+@attribute ierobežot numeric
 @attribute ierīc numeric
 @attribute iesak numeric
 @attribute iespēj numeric
 @attribute iespējam numeric
 @attribute iestād numeric
-@attribute ieteikt numeric
+@attribute iet numeric
 @attribute ieteikum numeric
 @attribute ietekm numeric
+@attribute ietvar numeric
 @attribute ikdien numeric
 @attribute ikvien numeric
+@attribute ilg numeric
 @attribute in numeric
 @attribute informācij numeric
+@attribute 'informācij sistēm' numeric
 @attribute informēj numeric
 @attribute instagr numeric
-@attribute instrument numeric
 @attribute interes numeric
 @attribute interesant numeric
 @attribute internet numeric
 @attribute intervij numeric
 @attribute investīcij numeric
 @attribute is numeric
+@attribute itālij numeric
 @attribute izaicinājum numeric
 @attribute izdarīt numeric
 @attribute izdevum numeric
 @attribute izglītīb numeric
-@attribute izklaid numeric
 @attribute izlas numeric
 @attribute izmaiņ numeric
 @attribute izmaks numeric
@@ -204,68 +291,87 @@
 @attribute izmantot numeric
 @attribute izmantošan numeric
 @attribute izmēr numeric
+@attribute izplatīb numeric
 @attribute izraisīt numeric
 @attribute izrād numeric
 @attribute izskat numeric
 @attribute izstrād numeric
-@attribute izstrādāt numeric
 @attribute izstād numeric
+@attribute izveidot numeric
 @attribute izvēl numeric
 @attribute izvēlēti numeric
+@attribute janvār numeric
 @attribute jaud numeric
+@attribute 'jaud kw' numeric
+@attribute 'jaud kw apgr' numeric
 @attribute jaun numeric
+@attribute 'jaun koronavīrus' numeric
+@attribute jaunieš numeric
 @attribute jaunum numeric
 @attribute jaunāk numeric
 @attribute jautājum numeric
+@attribute jebkur numeric
 @attribute jom numeric
+@attribute joproj numeric
 @attribute jum numeric
-@attribute jur numeric
+@attribute jābūt numeric
+@attribute jān numeric
 @attribute jūnij numeric
 @attribute jūr numeric
 @attribute jūs numeric
 @attribute jūt numeric
 @attribute kad numeric
 @attribute kaln numeric
-@attribute kandidāt numeric
-@attribute kapitāl numeric
+@attribute kam numeric
+@attribute kamer numeric
 @attribute kariņ numeric
 @attribute karjer numeric
 @attribute kart numeric
 @attribute karter numeric
+@attribute 'karter litr' numeric
 @attribute kas numeric
 @attribute katr numeric
 @attribute kaus numeric
 @attribute key numeric
 @attribute kg numeric
+@attribute 'kg ātrumkārb' numeric
 @attribute kilometr numeric
 @attribute kin numeric
 @attribute klient numeric
 @attribute klub numeric
-@attribute klīrens numeric
 @attribute km numeric
 @attribute ko numeric
-@attribute kod numeric
-@attribute kok numeric
 @attribute komand numeric
 @attribute komentār numeric
 @attribute komisij numeric
+@attribute kompānij numeric
 @attribute koncert numeric
+@attribute konkrēt numeric
 @attribute konkurs numeric
+@attribute kont numeric
 @attribute kontrol numeric
 @attribute kop numeric
 @attribute kopum numeric
 @attribute kopēj numeric
 @attribute kopīg numeric
+@attribute koronavīrus numeric
 @attribute krav numeric
 @attribute kredīt numeric
+@attribute krietn numeric
 @attribute krievij numeric
 @attribute krās numeric
+@attribute 'krās zil' numeric
 @attribute krīz numeric
 @attribute kubatūr numeric
+@attribute 'kubatūr cm' numeric
+@attribute 'kubatūr cm jaud' numeric
 @attribute kultūr numeric
 @attribute kur numeric
-@attribute kuģ numeric
+@attribute kurs numeric
+@attribute kustīb numeric
+@attribute kvalitāt numeric
 @attribute kw numeric
+@attribute 'kw apgr' numeric
 @attribute kād numeric
 @attribute kāj numeric
 @attribute kāpēc numeric
@@ -276,20 +382,23 @@
 @attribute lab numeric
 @attribute labāk numeric
 @attribute laik numeric
+@attribute 'laik kad' numeric
 @attribute lap numeric
 @attribute las numeric
 @attribute lasīt numeric
 @attribute lasītāj numeric
-@attribute latviancrossfit numeric
 @attribute latvieš numeric
 @attribute latvij numeric
 @attribute lauk numeric
 @attribute let numeric
+@attribute lidojum numeric
+@attribute lidost numeric
 @attribute liecin numeric
 @attribute liek numeric
 @attribute liel numeric
 @attribute lielisk numeric
 @attribute lielāk numeric
+@attribute 'lielāk dal' numeric
 @attribute liet numeric
 @attribute lietot numeric
 @attribute lietotāj numeric
@@ -297,42 +406,44 @@
 @attribute lik numeric
 @attribute likum numeric
 @attribute linkedin numeric
+@attribute 'linkedin reddit' numeric
+@attribute 'linkedin reddit vk' numeric
 @attribute litr numeric
-@attribute locekļ numeric
+@attribute 'litr sēdekl' numeric
+@attribute 'litr sēdekl augstum' numeric
+@attribute locekl numeric
 @attribute lom numeric
 @attribute lv numeric
 @attribute lēmum numeric
-@attribute lēt numeric
 @attribute līdz numeric
-@attribute līdzekļ numeric
+@attribute līdzekl numeric
 @attribute līdzīg numeric
 @attribute līg numeric
 @attribute līgum numeric
 @attribute līmen numeric
 @attribute m numeric
 @attribute maij numeric
-@attribute maiņ numeric
+@attribute main numeric
+@attribute mainīt numeric
 @attribute maks numeric
 @attribute maksājum numeric
-@attribute maksāt numeric
 @attribute man numeric
+@attribute manuprāt numeric
 @attribute mart numeric
 @attribute maršrut numeric
-@attribute mas numeric
-@attribute mat numeric
 @attribute materiāl numeric
 @attribute maz numeric
-@attribute mazliet numeric
 @attribute mazāk numeric
 @attribute mašīn numeric
-@attribute medicīn numeric
+@attribute medij numeric
 @attribute mehānisk numeric
 @attribute meln numeric
 @attribute metod numeric
 @attribute metr numeric
+@attribute mež numeric
 @attribute mieg numeric
-@attribute miljard numeric
 @attribute miljon numeric
+@attribute 'miljon eir' numeric
 @attribute milzīg numeric
 @attribute minimāl numeric
 @attribute ministr numeric
@@ -340,20 +451,32 @@
 @attribute minēt numeric
 @attribute minūt numeric
 @attribute mm numeric
+@attribute 'mm augstum' numeric
+@attribute 'mm augstum mm' numeric
+@attribute 'mm garantij' numeric
+@attribute 'mm garantij gad' numeric
+@attribute 'mm platum' numeric
+@attribute 'mm platum mm' numeric
+@attribute mobil numeric
 @attribute model numeric
-@attribute modeļ numeric
 @attribute motor numeric
+@attribute 'motor cilindr' numeric
+@attribute 'motor cilindr takt' numeric
+@attribute 'motor takt' numeric
+@attribute 'motor takt cilindr' numeric
 @attribute mum numeric
 @attribute muzej numeric
+@attribute mācīb numeric
 @attribute māj numeric
 @attribute mājaslap numeric
+@attribute mājokl numeric
 @attribute māksl numeric
 @attribute māksliniek numeric
 @attribute mēnes numeric
 @attribute mēneš numeric
 @attribute mēr numeric
+@attribute mērķ numeric
 @attribute mēs numeric
-@attribute mēģin numeric
 @attribute mūs numeric
 @attribute mūsdien numeric
 @attribute mūzik numeric
@@ -362,28 +485,51 @@
 @attribute nakt numeric
 @attribute naud numeric
 @attribute nav numeric
+@attribute 'nav iespējam' numeric
 @attribute nebij numeric
+@attribute nebū numeric
+@attribute nebūt numeric
 @attribute nedaudz numeric
+@attribute nedēl numeric
 @attribute nedēļ numeric
-@attribute neesm numeric
+@attribute 'nedēļ nogal' numeric
+@attribute 'nedēļ nogal paliec' numeric
 @attribute negatīv numeric
 @attribute nek numeric
 @attribute nekad numeric
+@attribute nekād numeric
+@attribute neliel numeric
 @attribute nemaz numeric
 @attribute nemir numeric
 @attribute nepieciešam numeric
-@attribute neret numeric
+@attribute nesen numeric
+@attribute nespēj numeric
+@attribute nevar numeric
+@attribute nevien numeric
+@attribute nezin numeric
 @attribute nikolson numeric
-@attribute nodokļ numeric
+@attribute 'nikolson dzīv' numeric
+@attribute 'nikolson dzīv princip' numeric
+@attribute nodokl numeric
 @attribute nodrošin numeric
 @attribute nodrošināt numeric
 @attribute nogal numeric
+@attribute 'nogal paliec' numeric
+@attribute 'nogal paliec māj' numeric
+@attribute nopietn numeric
 @attribute normāl numeric
 @attribute norād numeric
 @attribute norādīj numeric
-@attribute noslēpum numeric
+@attribute nosaukum numeric
 @attribute not numeric
+@attribute 'not found' numeric
+@attribute noteikt numeric
+@attribute noteikum numeric
+@attribute notiek numeric
+@attribute notik numeric
 @attribute notikum numeric
+@attribute novad numeric
+@attribute novembr numeric
 @attribute nozar numeric
 @attribute nozīm numeric
 @attribute nozīmīg numeric
@@ -392,54 +538,81 @@
 @attribute nākotn numeric
 @attribute objekt numeric
 @attribute of numeric
+@attribute oficiāl numeric
 @attribute on numeric
-@attribute organism numeric
 @attribute organizācij numeric
 @attribute otr numeric
 @attribute pabalst numeric
 @attribute pacient numeric
 @attribute padom numeric
+@attribute pagaid numeric
+@attribute pagājuš numeric
 @attribute pakalpojum numeric
 @attribute paliec numeric
+@attribute 'paliec māj' numeric
 @attribute palīdz numeric
 @attribute palīdzēt numeric
 @attribute palīdzīb numeric
+@attribute pamat numeric
+@attribute pandēmij numeric
 @attribute papild numeric
 @attribute parast numeric
+@attribute paredzēt numeric
+@attribute pareiz numeric
 @attribute parlament numeric
 @attribute parpret numeric
+@attribute 'parpret atbildēt' numeric
 @attribute partij numeric
 @attribute partner numeric
 @attribute parād numeric
 @attribute pasaul numeric
-@attribute pasažier numeric
+@attribute pasākum numeric
 @attribute pat numeric
 @attribute paties numeric
 @attribute patiesīb numeric
 @attribute patīk numeric
-@attribute paud numeric
 @attribute pavis numeric
 @attribute paš numeric
 @attribute pašlaik numeric
 @attribute pašvaldīb numeric
-@attribute pelēk numeric
 @attribute pensij numeric
+@attribute period numeric
 @attribute person numeric
+@attribute personīg numeric
+@attribute piec numeric
+@attribute piedāv numeric
+@attribute piedāvājum numeric
+@attribute piedāvāt numeric
 @attribute pieejam numeric
 @attribute piemēr numeric
+@attribute piemērot numeric
 @attribute pieredz numeric
+@attribute pietiekam numeric
 @attribute pievienot numeric
+@attribute pieņemt numeric
 @attribute piln numeric
+@attribute pilnīb numeric
+@attribute pilnīg numeric
+@attribute pilsēt numeric
 @attribute pinterest numeric
+@attribute 'pinterest linkedin' numeric
+@attribute 'pinterest linkedin reddit' numeric
+@attribute pirm numeric
+@attribute 'pirm reiz' numeric
 @attribute placement numeric
+@attribute 'placement cod' numeric
+@attribute 'placement cod for' numeric
 @attribute planēt numeric
 @attribute platform numeric
 @attribute platum numeric
+@attribute 'platum mm' numeric
+@attribute 'platum mm augstum' numeric
 @attribute plaš numeric
 @attribute plašāk numeric
 @attribute plkst numeric
 @attribute plu numeric
 @attribute plān numeric
+@attribute plānot numeric
 @attribute policij numeric
 @attribute politik numeric
 @attribute politisk numeric
@@ -448,77 +621,96 @@
 @attribute portāl numeric
 @attribute posm numeric
 @attribute potenciāl numeric
+@attribute pozitīv numeric
+@attribute pozīcij numeric
 @attribute praktisk numeric
 @attribute prasm numeric
 @attribute prasīb numeric
+@attribute prec numeric
 @attribute prezident numeric
 @attribute priek numeric
 @attribute priekš numeric
 @attribute priekšsēdētāj numeric
 @attribute princip numeric
+@attribute 'princip aizraujoš' numeric
+@attribute 'princip aizraujoš seriāl' numeric
+@attribute privāt numeric
 @attribute problēm numeric
 @attribute procent numeric
 @attribute proces numeric
 @attribute produkt numeric
+@attribute profesionāl numeric
 @attribute programm numeric
 @attribute projekt numeric
 @attribute prot numeric
 @attribute protam numeric
 @attribute prāt numeric
 @attribute puarolv numeric
-@attribute publicitāt numeric
 @attribute publicēt numeric
-@attribute publikācij numeric
 @attribute publisk numeric
 @attribute punkt numeric
+@attribute pus numeric
 @attribute pār numeric
-@attribute pārkāpum numeric
-@attribute pārmaiņ numeric
 @attribute pārstāv numeric
+@attribute pārtik numeric
 @attribute pārtraukt numeric
 @attribute pārāk numeric
+@attribute pārēj numeric
+@attribute pēdēj numeric
 @attribute pērn numeric
 @attribute pētniek numeric
 @attribute pētījum numeric
 @attribute r numeric
+@attribute rad numeric
 @attribute radoš numeric
 @attribute radīt numeric
 @attribute raidījum numeric
 @attribute rakst numeric
-@attribute ražotāj numeric
+@attribute 'rakst džek' numeric
+@attribute 'rakst džek nikolson' numeric
 @attribute ražošan numeric
+@attribute realitāt numeric
 @attribute reddit numeric
+@attribute 'reddit vk' numeric
+@attribute redz numeric
+@attribute redzam numeric
 @attribute redzēt numeric
 @attribute regulār numeric
 @attribute reiz numeric
 @attribute ret numeric
 @attribute rezultāt numeric
-@attribute reģ numeric
+@attribute reāl numeric
+@attribute reģion numeric
 @attribute reģistrēt numeric
 @attribute režisor numeric
 @attribute riep numeric
+@attribute 'riep izmēr' numeric
+@attribute rind numeric
 @attribute risinājum numeric
 @attribute risk numeric
+@attribute robež numeric
 @attribute rok numeric
+@attribute run numeric
+@attribute rīcīb numeric
 @attribute rīg numeric
+@attribute 'rīg dom' numeric
 @attribute rīt numeric
+@attribute sabiedrisk numeric
 @attribute sabiedrīb numeric
 @attribute sacensīb numeric
 @attribute sacīj numeric
 @attribute sadarbīb numeric
-@attribute sadaļ numeric
 @attribute saeim numeric
 @attribute saistīb numeric
+@attribute saistīt numeric
 @attribute sajūt numeric
 @attribute sak numeric
-@attribute sal numeric
 @attribute samazināt numeric
 @attribute saprast numeric
 @attribute sarakst numeric
-@attribute sarkan numeric
+@attribute sarežģīt numeric
 @attribute sarun numeric
-@attribute saskaņ numeric
-@attribute sasniegum numeric
+@attribute sasniegt numeric
 @attribute sastāv numeric
 @attribute satiksm numeric
 @attribute satur numeric
@@ -526,15 +718,20 @@
 @attribute saul numeric
 @attribute sav numeric
 @attribute savienīb numeric
+@attribute savukārt numeric
+@attribute saņem numeric
 @attribute saņemt numeric
+@attribute saņēm numeric
+@attribute sej numeric
 @attribute sek numeric
-@attribute sekot numeric
 @attribute sekund numeric
 @attribute sen numeric
-@attribute septembr numeric
 @attribute seriāl numeric
+@attribute 'seriāl nedēļ' numeric
+@attribute 'seriāl nedēļ nogal' numeric
 @attribute sev numeric
 @attribute sezon numeric
+@attribute seš numeric
 @attribute sia numeric
 @attribute sieviet numeric
 @attribute sird numeric
@@ -542,12 +739,21 @@
 @attribute situācij numeric
 @attribute skaidr numeric
 @attribute skaist numeric
+@attribute skait numeric
 @attribute skat numeric
 @attribute skatītāj numeric
 @attribute skol numeric
 @attribute skolēn numeric
+@attribute slikt numeric
 @attribute slimīb numeric
+@attribute smag numeric
+@attribute sniedz numeric
+@attribute sniegt numeric
+@attribute sociāl numeric
 @attribute sohc numeric
+@attribute 'sohc kubatūr' numeric
+@attribute 'sohc kubatūr cm' numeric
+@attribute sol numeric
 @attribute sourc numeric
 @attribute speciālist numeric
 @attribute sport numeric
@@ -559,43 +765,54 @@
 @attribute spēlētāj numeric
 @attribute starptautisk numeric
 @attribute starter numeric
+@attribute 'starter elektrisk' numeric
 @attribute stingr numeric
+@attribute strauj numeric
 @attribute stres numeric
+@attribute strād numeric
+@attribute strādāt numeric
 @attribute student numeric
 @attribute studij numeric
 @attribute stund numeric
 @attribute stāst numeric
-@attribute stūr numeric
+@attribute stāvokl numeric
 @attribute summ numeric
 @attribute svar numeric
+@attribute 'svar kg' numeric
+@attribute 'svar kg ātrumkārb' numeric
 @attribute svarīg numeric
 @attribute svarīgāk numeric
 @attribute svētk numeric
 @attribute sāk numeric
-@attribute sēd numeric
-@attribute sēdekļ numeric
+@attribute sākotnēj numeric
+@attribute sākt numeric
+@attribute sākum numeric
+@attribute sēdekl numeric
+@attribute 'sēdekl augstum' numeric
+@attribute 'sēdekl augstum mm' numeric
 @attribute sērij numeric
+@attribute tagad numeric
 @attribute tai numeric
 @attribute taj numeric
-@attribute tak numeric
 @attribute takt numeric
+@attribute 'takt cilindr' numeric
 @attribute tam numeric
 @attribute tas numeric
+@attribute 'tas nav' numeric
 @attribute taut numeric
-@attribute tautsaimniecīb numeric
 @attribute tav numeric
 @attribute tehnisk numeric
 @attribute tehnoloģij numeric
 @attribute teic numeric
+@attribute teikt numeric
 @attribute tej numeric
 @attribute tekst numeric
 @attribute telefon numeric
-@attribute temperatūr numeric
-@attribute termiņ numeric
+@attribute telp numeric
+@attribute termin numeric
 @attribute test numeric
 @attribute tev numeric
 @attribute teātr numeric
-@attribute that numeric
 @attribute the numeric
 @attribute thi numeric
 @attribute tie numeric
@@ -605,31 +822,50 @@
 @attribute tieš numeric
 @attribute tiešsaist numeric
 @attribute tilpum numeric
+@attribute 'tilpum litr' numeric
+@attribute 'tilpum litr sēdekl' numeric
 @attribute tirdzniecīb numeric
 @attribute tirg numeric
 @attribute to numeric
+@attribute tos numeric
+@attribute tostarp numeric
 @attribute transport numeric
+@attribute transportlīdzekl numeric
 @attribute trener numeric
-@attribute treniņ numeric
+@attribute trenin numeric
+@attribute treš numeric
+@attribute trī numeric
 @attribute tu numeric
 @attribute tur numeric
 @attribute turklāt numeric
+@attribute turpin numeric
 @attribute turpināt numeric
 @attribute turpmāk numeric
+@attribute tuvāk numeric
 @attribute tv numeric
 @attribute twitter numeric
+@attribute 'twitter draug' numeric
+@attribute 'twitter draug whatsapp' numeric
 @attribute tād numeric
+@attribute tādējād numeric
+@attribute tāl numeric
+@attribute tālāk numeric
+@attribute tām numeric
+@attribute tāpat numeric
 @attribute tās numeric
 @attribute tātad numeric
 @attribute tēm numeric
+@attribute tīkl numeric
 @attribute tūkstoš numeric
 @attribute universitāt numeric
 @attribute uzdevum numeric
 @attribute uzkrājum numeric
 @attribute uzlabot numeric
+@attribute uzmanīb numeric
+@attribute uzreiz numeric
+@attribute uzskat numeric
 @attribute uzsver numeric
 @attribute uztur numeric
-@attribute uzturēt numeric
 @attribute uzvar numeric
 @attribute uzzināt numeric
 @attribute uzņēmum numeric
@@ -637,7 +873,11 @@
 @attribute vadaplkat numeric
 @attribute vadīb numeric
 @attribute vadītāj numeric
+@attribute vair numeric
 @attribute vairāk numeric
+@attribute vajadzēt numeric
+@attribute vajadzīb numeric
+@attribute vajadzīg numeric
 @attribute vakar numeric
 @attribute vald numeric
 @attribute valdīb numeric
@@ -647,8 +887,11 @@
 @attribute varbūt numeric
 @attribute variant numeric
 @attribute varēt numeric
+@attribute vasar numeric
 @attribute vec numeric
+@attribute vecum numeric
 @attribute vecāk numeric
+@attribute veic numeric
 @attribute veid numeric
 @attribute veidot numeric
 @attribute veikal numeric
@@ -657,45 +900,57 @@
 @attribute veltīt numeric
 @attribute versij numeric
 @attribute veselīb numeric
+@attribute vid numeric
 @attribute vide numeric
 @attribute vidēj numeric
 @attribute viedokl numeric
-@attribute viedokļ numeric
 @attribute viegl numeric
 @attribute vien numeric
+@attribute 'vien otr' numeric
 @attribute vienkārš numeric
+@attribute vienlaik numeric
 @attribute vienmēr numeric
-@attribute viesnīc numeric
+@attribute vienīg numeric
 @attribute viet numeric
 @attribute vietn numeric
+@attribute vietēj numeric
+@attribute vin numeric
 @attribute vingrinājum numeric
 @attribute vingrojum numeric
 @attribute virtuāl numeric
+@attribute virzien numeric
 @attribute vis numeric
-@attribute vislabāk numeric
+@attribute vismaz numeric
+@attribute vispār numeric
 @attribute viņ numeric
 @attribute vk numeric
 @attribute vācij numeric
 @attribute vārd numeric
 @attribute vārst numeric
 @attribute vēl numeric
+@attribute 'vēl vairāk' numeric
+@attribute 'vēl vien' numeric
 @attribute vēli numeric
+@attribute vēlm numeric
+@attribute vēlāk numeric
 @attribute vēlēšan numeric
 @attribute vēr numeric
+@attribute vērt numeric
 @attribute vērtīb numeric
 @attribute vēstur numeric
 @attribute vīn numeric
-@attribute vīr numeric
-@attribute vīrieš numeric
 @attribute vīrus numeric
 @attribute whatsapp numeric
+@attribute 'whatsapp epast' numeric
+@attribute 'whatsapp epast pinterest' numeric
 @attribute who numeric
 @attribute x numeric
 @attribute you numeric
 @attribute zaudējum numeric
-@attribute zaļ numeric
 @attribute zem numeric
 @attribute zemāk numeric
+@attribute zil numeric
+@attribute zin numeric
 @attribute zinām numeric
 @attribute zinātn numeric
 @attribute zinātniek numeric
@@ -705,34 +960,47 @@
 @attribute zvaigzn numeric
 @attribute zviedrij numeric
 @attribute zāl numeric
-@attribute zīl numeric
 @attribute zīm numeric
 @attribute ārkārt numeric
 @attribute ārkārtēj numeric
+@attribute 'ārkārtēj situācij' numeric
 @attribute ārst numeric
-@attribute ārzem numeric
-@attribute ārā numeric
+@attribute ātr numeric
 @attribute ātrum numeric
 @attribute ātrumkārb numeric
+@attribute 'ātrumkārb mehānisk' numeric
+@attribute ātrāk numeric
 @attribute čempionāt numeric
+@attribute četr numeric
 @attribute ēdien numeric
 @attribute ērt numeric
 @attribute ģimen numeric
 @attribute īpaš numeric
+@attribute īpašniek numeric
 @attribute īpašum numeric
 @attribute īst numeric
 @attribute ķermen numeric
+@attribute ķīn numeric
 @attribute ļauj numeric
 @attribute ļot numeric
 @attribute ņemot numeric
+@attribute 'ņemot vēr' numeric
+@attribute šaj numeric
 @attribute šeit numeric
 @attribute šie numeric
+@attribute šiem numeric
+@attribute šim numeric
 @attribute šis numeric
 @attribute šo numeric
 @attribute šobrīd numeric
+@attribute šodien numeric
+@attribute šogad numeric
 @attribute šoreiz numeric
 @attribute šād numeric
+@attribute šī numeric
+@attribute šīs numeric
 @attribute šķidrum numeric
+@attribute 'šķidrum dzesēšan' numeric
 @attribute šķiet numeric
 @attribute ūden numeric
 @attribute žurnāl numeric
