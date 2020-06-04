@@ -39,16 +39,16 @@ public class DbSpout extends AbstractQueryingSpout {
         super.open(conf, context, collector);
         resourceFolder = ConfUtils.getString(conf, "focer.resourceFolder");
         boolean cleanDb = ConfUtils.getBoolean(conf, "focer.cleanDb", false);
-        List<String> seeds = ConfUtils.loadListFromConf("focer.seeds", conf);
 
-        if(cleanDb){
-           SqlSession session = SessionManager.getSession(resourceFolder);
-           LinksMapper lm = session.getMapper(LinksMapper.class);
-           DomainsMapper dm = session.getMapper(DomainsMapper.class);
+        SqlSession session = SessionManager.getSession(resourceFolder);
+        LinksMapper lm = session.getMapper(LinksMapper.class);
+        if(cleanDb || lm.getAll().isEmpty()){
+            List<String> seeds = ConfUtils.loadListFromConf("focer.seeds", conf);
+            DomainsMapper dm = session.getMapper(DomainsMapper.class);
 
-           lm.cleanTable();
-           dm.cleanTable();
-           seeds.forEach(s -> {
+            lm.cleanTable();
+            dm.cleanTable();
+            seeds.forEach(s -> {
                        dm.insert(new Domains(null, s));
                        try {
                            lm.insert(new Links(null, dm.getByLinkDomain(s).getId(), s, MessageDigest.getInstance("SHA-1").digest(s.getBytes()), false, 0, null));
@@ -57,8 +57,8 @@ public class DbSpout extends AbstractQueryingSpout {
                        }
                    });
 
-           session.commit();
-           session.close();
+            session.commit();
+            session.close();
         }
 
     }
