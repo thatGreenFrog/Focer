@@ -1,7 +1,8 @@
 dependencies {
     implementation project(":page-parser")
-    implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.4'
-    implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+    implementation project(":db-connection")
+    implementation project(":classifier-bolt")
+    implementation project(":link-parser")
 }
 
 jar{

@@ -50,8 +50,8 @@ config:
   # the FetcherBolt will log the content of its internal queues to the logs
   # fetcherbolt.queue.debug.filepath: "/tmp/fetcher-dump-{port}"
 
-  parsefilters.config.file: "parsefilters.json"
-  urlfilters.config.file: "urlfilters.json"
+  parsefilters.config.file: "parsefilter.json"
+  urlfilters.config.file: "urlfilter.json"
 
   # revisit a page daily (value in minutes)
   # set it to -1 to never refetch a page
@@ -94,3 +94,21 @@ config:
   topology.metrics.consumer.register:
     - class: "org.apache.storm.metric.LoggingMetricsConsumer"
       parallelism.hint: 1
+
+  focer.resourceFolder: "/home/crawler/resources"
+  focer.solr: "http://localhost:8983/solr/crawler"
+  focer.maxNgramBinary: 2
+  focer.maxNgramMulti: 3
+  focer.binaryDocCount: 5252
+  focer.multiDocCount: 2358
+  focer.cleanDb: true
+  focer.seeds:
+    - "http://www.baltaisruncis.lv/blogs/latvijas-labakie-blogi/"
+    - "https://www.delfi.lv/"
+    - "https://www.tvnet.lv/"
+    - "https://www.apollo.lv/"
+  focer.blacklist:
+    - "draugiem.lv"
+    - "facebook.com"
+    - "twitter.com"
+    - "vkontakte.ru"

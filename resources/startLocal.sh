@@ -1,0 +1,1 @@
+java -cp libs\*:focer-0.1.jar lv.greenfrog.crawler.FocerCrawlTopology "-local" "-conf" "config.yaml"

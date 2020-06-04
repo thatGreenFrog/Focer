@@ -1,4 +1,4 @@
-package lv.greenfrog.crawler.queue.persistence;
+package lv.greenfrog.crawler.persistence;
 
 import java.util.List;
 
