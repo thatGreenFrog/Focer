@@ -41,4 +41,4 @@ Crawler was tested on Ubuntu 18.04 VM.
    * Every other parameter is related to [StormCrawler configuration](https://github.com/DigitalPebble/storm-crawler/wiki/Configuration).
 6. Add your classification models to corresponding folder in resources folder. You also have to add prepared Weka dictionary generated with `StringToWordVector` filter and tokenized arff file. From arff file only structure is required, so everything after `@data` tag can be deleted. Or you can use default classifiers included with project.
 7. If you want to run crawler in Storm cluster copy [extlibs](extlibs) contents to {storm_home}/extlib folder.
-8. Run [startWithStorm.sh](resources/startWithStorm.sh) to run in Storm cluster or [startLocal.sh](resources/startLocal.sh) to start locally without Storm cluster.
+8. Run [startWithStorm.sh](resources/startWithStorm.sh) to run in Storm cluster or [startLocal.sh](resources/startLocal.sh) to start locally without Storm cluster. If you are starting crawler in Storm cluster edit [startWithStorm.sh](resources/startWithStorm.sh) script so it points to correct Storm folder.
