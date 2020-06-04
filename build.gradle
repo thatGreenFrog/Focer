@@ -1,3 +1,5 @@
+def outputFolder = "$rootDir/output"
+def libsFolder = "$outputFolder/libs"
 
 allprojects {
 
@@ -17,7 +19,7 @@ allprojects {
     dependencies {
         testCompile group: 'junit', name: 'junit', version: '4.12'
         implementation group: 'com.digitalpebble.stormcrawler', name: 'storm-crawler-core', version: '1.16'
-        compileOnly group: 'org.apache.storm', name: 'storm-core', version: '1.2.3'
+        implementation group: 'org.apache.storm', name: 'storm-core', version: '1.2.3'
         implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.4'
         implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
     }
@@ -26,35 +28,34 @@ allprojects {
         options.encoding = 'UTF-8'
     }
 }
-def mainProjects = [':crawler-impl', ':page-parser', ':db-connection', ':classifier-bolt', ':link-parser']
-task oneJar( type: Jar , dependsOn: mainProjects.collect{ it+":compileJava"}) {
-    from files(mainProjects.collect{ project(it).sourceSets.main.output })
-}
 
 subprojects{
-    if (it.name != 'crawler-impl'){
-        task copyToLib(type: Copy){
-            into "$rootDir/output/libs"
-            from configurations.runtimeClasspath
-        }
-
-        jar{
-            dependsOn(copyToLib)
-            doLast {
-                project.copy{
-                    from jar.archiveFile
-                    into "$rootDir/output/libs"
-                }
-            }
-        }
+    task copyToLib(type: Copy){
+        into libsFolder
+        from configurations.runtimeClasspath
     }
 }
 
-task copyEtc(type: Copy){
-    from "$rootDir/resources"
-    into "$rootDir/output"
+def mainProjects = [':crawler-impl', ':page-parser', ':db-connection', ':classifier-bolt', ':link-parser']
+task createOneJar( type: Jar , dependsOn: mainProjects.collect{ it+":compileJava"}) {
+    from files(mainProjects.collect{ project(it).sourceSets.main.output })
 }
 
-jar.dependsOn(clean)
-jar.dependsOn(copyEtc)
-jar.dependsOn("crawler-impl:jar")
+task oneJar(type: Copy){
+    from "$rootDir/build/libs"
+    into outputFolder
+}
+
+task cleanOutputs(type: Delete){
+    delete outputFolder
+}
+
+task copyResources(type: Copy){
+    from "$rootDir/resources"
+    into outputFolder
+}
+
+oneJar.dependsOn(copyResources)
+oneJar.dependsOn(cleanOutputs)
+oneJar.dependsOn(createOneJar)
+
