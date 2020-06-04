@@ -1,18 +1,18 @@
-#Disclaimer
-##Not for use in production.
+# Disclaimer 
+## Not for use in production.
 This is just a prototype (proof of concept) for focused web-crawler using text classification algorithms.  
-#Focer
+# Focer
 Focer is Focused web-crawler based on [StormCrawler](https://github.com/DigitalPebble/storm-crawler).
 It was developed as part of Bachelor's thesis Development of focused web-crawler by Mārtiņš Trubiņš, Riga Technical university.
-##Requirements
+## Requirements
 - Java 11
 - Apache Storm cluster (can be run in -local mode without Storm) tested with version 1.2.3
 - Apache Solr tested with version 8.5.1
-##Limitations
+## Limitations
 As mentioned before this just prototype, so limitations apply:
 - Only Latvian language is supported
 - Only HTML mime-type is supported
-##Classifiers
+## Classifiers
 [Weka](https://waikato.github.io/weka-wiki/) trained models are used as classifiers.
 Crawler consists of two classifiers primary(binary) and secondary(multi-class).
 1. Primary classifier is used to determin outliers.
@@ -24,7 +24,7 @@ Crawler consists of two classifiers primary(binary) and secondary(multi-class).
    * Politics
    * Sports
    * Technology
-##Run crawler
+## Run crawler
 Crawler was tested on Ubuntu 18.04 VM.
 1. Make sure you have Java 11 installed.
 2. Configure [Storm cluster](https://storm.apache.org/releases/current/Setting-up-a-Storm-cluster.html)
