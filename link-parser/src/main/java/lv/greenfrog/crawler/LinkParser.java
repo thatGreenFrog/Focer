@@ -4,9 +4,7 @@ import com.digitalpebble.stormcrawler.Metadata;
 import com.digitalpebble.stormcrawler.bolt.StatusEmitterBolt;
 import com.digitalpebble.stormcrawler.util.CharsetIdentification;
 import com.digitalpebble.stormcrawler.util.ConfUtils;
-import lv.greenfrog.crawler.persistence.DomainsMapper;
 import lv.greenfrog.crawler.persistence.LinksMapper;
-import lv.greenfrog.crawler.persistence.entity.Domains;
 import lv.greenfrog.crawler.persistence.entity.Links;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.storm.task.OutputCollector;
@@ -72,17 +70,10 @@ public class LinkParser extends StatusEmitterBolt {
                         if(uri.getHost() == null || uri.getHost().matches(blacklist)) throw new URISyntaxException("", ""); //e-mail and other crap
                         String domain = uri.getHost().startsWith("www.") ? uri.getHost().substring(4) : uri.getHost();
 
-                        Domains newDomain = session.getMapper(DomainsMapper.class).getByLinkDomain(domain);
-                        if (newDomain == null) {
-                            newDomain = new Domains(null, domain);
-                            session.getMapper(DomainsMapper.class).insert(newDomain);
-                            newDomain = session.getMapper(DomainsMapper.class).getByLinkDomain(domain);
-                        }
-
                         byte[] linkHash = md.digest(url.getBytes());
                         Links newLink = session.getMapper(LinksMapper.class).getByHash(linkHash);
                         if (newLink == null) {
-                            newLink = new Links(null, newDomain.getId(), url, linkHash, false, score, null);
+                            newLink = new Links(null, url, linkHash, false, score);
                             session.getMapper(LinksMapper.class).insert(newLink);
                         } else if (!newLink.isVisited()) {
                             newLink.setScore(newLink.getScore() + score);

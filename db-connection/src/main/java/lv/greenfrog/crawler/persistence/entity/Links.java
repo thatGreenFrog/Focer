@@ -4,8 +4,6 @@ public class Links {
 
     Integer id;
 
-    Integer idDomain;
-
     String link;
 
     byte[] linkHash;
@@ -14,24 +12,12 @@ public class Links {
 
     Integer score;
 
-    String metadata;
-
-    public Links(Integer id, Integer idDomain, String link, byte[] linkHash, boolean visited, Integer score, String metadata) {
+    public Links(Integer id, String link, byte[] linkHash, boolean visited, Integer score) {
         this.id = id;
-        this.idDomain = idDomain;
         this.link = link;
         this.linkHash = linkHash;
         this.visited = visited;
         this.score = score;
-        this.metadata = metadata;
-    }
-
-    public String getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(String metadata) {
-        this.metadata = metadata;
     }
 
     public Integer getScore() {
@@ -48,14 +34,6 @@ public class Links {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getIdDomain() {
-        return idDomain;
-    }
-
-    public void setIdDomain(Integer idDomain) {
-        this.idDomain = idDomain;
     }
 
     public String getLink() {

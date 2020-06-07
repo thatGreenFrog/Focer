@@ -1,6 +1,6 @@
 package lv.greenfrog.crawler;
 
-import lv.greenfrog.crawler.persistence.AbstractMapper;
+import lv.greenfrog.crawler.persistence.LinksMapper;
 import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
@@ -18,7 +18,7 @@ public class SessionManager {
     public static SqlSession getSession(String resourceFolder){
         if(factory == null){
             Configuration cnf = new Configuration();
-            cnf.addMappers("lv.greenfrog.crawler.persistence", AbstractMapper.class);
+            cnf.addMappers("lv.greenfrog.crawler.persistence", LinksMapper.class);
             Environment env = new Environment(
                     "queue",
                     new JdbcTransactionFactory(),
