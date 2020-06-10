@@ -27,7 +27,7 @@ public class FocerCrawlTopology extends ConfigurableTopology {
                 .localOrShuffleGrouping("fetch");
         builder.setBolt("classify", new ClassifierBolt())
                 .localOrShuffleGrouping("parsePage");
-        builder.setBolt("parseLinks", new LinkParser())
+        builder.setBolt("parseLinks", new LinkParserBolt())
                 .localOrShuffleGrouping("classify");
         Fields furl = new Fields("url");
         builder.setBolt("status", new StdOutStatusUpdater())

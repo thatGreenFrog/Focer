@@ -30,9 +30,9 @@ import java.util.stream.Collectors;
 
 import static com.digitalpebble.stormcrawler.Constants.StatusStreamName;
 
-public class LinkParser extends StatusEmitterBolt {
+public class LinkParserBolt extends StatusEmitterBolt {
 
-    private static final Logger log = LoggerFactory.getLogger(LinkParser.class);
+    private static final Logger log = LoggerFactory.getLogger(LinkParserBolt.class);
     private MessageDigest md;
     private String resourceFolder;
     private String blacklist;
