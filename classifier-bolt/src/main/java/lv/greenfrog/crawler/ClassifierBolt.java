@@ -46,7 +46,7 @@ public class ClassifierBolt extends StatusEmitterBolt {
 
             }
 
-            if(StringUtils.equals("Negative", className) || indexNegative)
+            if(!StringUtils.equals("Negative", className) || indexNegative)
                 solrIndexer.save(content, text, url, className);
 
             collector.emit(input, new Values(url, content, metadata, text, className));
@@ -65,7 +65,7 @@ public class ClassifierBolt extends StatusEmitterBolt {
     @Override
     public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
         super.prepare(stormConf, context, collector);
-        indexNegative = ConfUtils.getBoolean(stormConf, "focer.IndexNegative", false);
+        indexNegative = ConfUtils.getBoolean(stormConf, "focer.indexNegative", false);
         solrIndexer = new SolrIndexer(ConfUtils.getString(stormConf, "focer.solr"));
         try {
             String resourceFolder = ConfUtils.getString(stormConf, "focer.resourceFolder");
