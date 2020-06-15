@@ -18,41 +18,24 @@ public class FocerCrawlTopology extends ConfigurableTopology {
     @Override
     protected int run(String[] args) {
         TopologyBuilder builder = new TopologyBuilder();
-
-        builder.setSpout("spout", new DbSpout());
-
+        builder.setSpout("queue", new DbSpout());
         builder.setBolt("partitioner", new URLPartitionerBolt())
-                .shuffleGrouping("spout");
-
+                .shuffleGrouping("queue");
         builder.setBolt("fetch", new FetcherBolt())
                 .fieldsGrouping("partitioner", new Fields("key"));
-
-        builder.setBolt("sitemap", new SiteMapParserBolt())
-                .localOrShuffleGrouping("fetch");
-
-        builder.setBolt("feeds", new FeedParserBolt())
-                .localOrShuffleGrouping("sitemap");
-
         builder.setBolt("parsePage", new PageParserBolt())
-                .localOrShuffleGrouping("feeds");
-
+                .localOrShuffleGrouping("fetch");
         builder.setBolt("classify", new ClassifierBolt())
                 .localOrShuffleGrouping("parsePage");
-
-        builder.setBolt("parseLinks", new LinkParser())
+        builder.setBolt("parseLinks", new LinkParserBolt())
                 .localOrShuffleGrouping("classify");
-
         Fields furl = new Fields("url");
-
         builder.setBolt("status", new StdOutStatusUpdater())
                 .fieldsGrouping("fetch", Constants.StatusStreamName, furl)
-                .fieldsGrouping("sitemap", Constants.StatusStreamName, furl)
-                .fieldsGrouping("feeds", Constants.StatusStreamName, furl)
                 .fieldsGrouping("parsePage", Constants.StatusStreamName, furl)
                 .fieldsGrouping("classify", Constants.StatusStreamName, furl)
                 .fieldsGrouping("parseLinks", Constants.StatusStreamName, furl);
-
-        return submit("crawl_tf_idf", conf, builder);
+        return submit("crawl_tf_idf_final", conf, builder);
     }
 
 }

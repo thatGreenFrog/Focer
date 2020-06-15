@@ -53,7 +53,6 @@ public class PageParserBolt extends StatusEmitterBolt {
 
     @Override
     public void execute(Tuple input) {
-        if(languageDetector == null) throw new NullPointerException("PageParserBolt: LanguageDetector not initialized"); //Can't continue if language detector not present.
         log.debug("Starting web page preprocessing");
 
         String text;
@@ -136,6 +135,7 @@ public class PageParserBolt extends StatusEmitterBolt {
             languageDetector = LanguageDetectorBuilder.create(NgramExtractors.standard()).withProfiles(l).build();
         } catch (IOException e) {
             log.error("Exception initializing language detector.", e);
+            throw new RuntimeException(e);
         }
     }
 }

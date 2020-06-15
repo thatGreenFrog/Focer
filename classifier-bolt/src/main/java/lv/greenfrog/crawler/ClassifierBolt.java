@@ -7,6 +7,7 @@ import com.digitalpebble.stormcrawler.persistence.Status;
 import com.digitalpebble.stormcrawler.util.ConfUtils;
 import lv.greenfrog.crawler.classifier.AbstractFocerClassifier;
 import lv.greenfrog.crawler.indexer.SolrIndexer;
+import org.apache.commons.lang.StringUtils;
 import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.OutputFieldsDeclarer;
@@ -24,10 +25,10 @@ import static com.digitalpebble.stormcrawler.Constants.StatusStreamName;
 public class ClassifierBolt extends StatusEmitterBolt {
 
     private static final Logger log = LoggerFactory.getLogger(ClassifierBolt.class);
+    private boolean indexNegative;
 
     private SolrIndexer solrIndexer;
     private Map<String, AbstractFocerClassifier> classifiers;
-    private boolean solrIsReachable;
 
     @Override
     public void execute(Tuple input) {
@@ -43,9 +44,10 @@ public class ClassifierBolt extends StatusEmitterBolt {
 
                 className = classifiers.get("m").classify(text);
 
-                if(solrIsReachable) solrIndexer.save(content, text, url, className);
-
             }
+
+            if(!StringUtils.equals("Negative", className) || indexNegative)
+                solrIndexer.save(content, text, url, className);
 
             collector.emit(input, new Values(url, content, metadata, text, className));
             collector.ack(input);
@@ -57,17 +59,15 @@ public class ClassifierBolt extends StatusEmitterBolt {
             collector.ack(input);
         }
 
-        collector.ack(input);
-
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
         super.prepare(stormConf, context, collector);
+        indexNegative = ConfUtils.getBoolean(stormConf, "focer.indexNegative", false);
         solrIndexer = new SolrIndexer(ConfUtils.getString(stormConf, "focer.solr"));
         try {
-            solrIsReachable = solrIndexer.solrIsReachable();
             String resourceFolder = ConfUtils.getString(stormConf, "focer.resourceFolder");
             classifiers = new HashMap<>();
 

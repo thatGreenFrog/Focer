@@ -97,6 +97,7 @@ config:
 
   focer.resourceFolder: "/home/crawler/resources"
   focer.solr: "http://localhost:8983/solr/crawler"
+  focer.indexNegative: true
   focer.maxNgramBinary: 2
   focer.maxNgramMulti: 3
   focer.binaryDocCount: 5252
