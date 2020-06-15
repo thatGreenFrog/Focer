@@ -4,4 +4,5 @@ include 'page-parser'
 include 'db-connection'
 include 'classifier-bolt'
 include 'link-parser'
+include 'prepare-data'
 
